@@ -29,6 +29,7 @@ class CoreServiceProvider extends ServiceProvider
 
         // global middleware
         $kernel = $this->app->make('Illuminate\Contracts\Http\Kernel');
+        $kernel->pushMiddleware('Ecrmnn\LaravelHttps\Http\Middleware\ForceHttps');
         $kernel->pushMiddleware('Kokst\Core\Http\Middleware\DefineMenus');
     }
 
