@@ -1,1 +1,1 @@
-@extends('tabler.auth.passwords.reset')
+@extends('core::tabler.auth.passwords.reset')

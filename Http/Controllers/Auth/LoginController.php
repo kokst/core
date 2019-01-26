@@ -28,6 +28,16 @@ class LoginController extends Controller
     protected $redirectTo = '/home';
 
     /**
+     * Show the application's login form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showLoginForm()
+    {
+        return view('core::auth.login');
+    }
+
+    /**
      * Create a new controller instance.
      *
      * @return void

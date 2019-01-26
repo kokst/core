@@ -1,1 +1,1 @@
-@extends('tabler.auth.passwords.email')
+@extends('core::tabler.auth.passwords.email')

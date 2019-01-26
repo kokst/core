@@ -1,1 +1,1 @@
-@extends('tabler.auth.register')
+@extends('core::tabler.auth.register')
