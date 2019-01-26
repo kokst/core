@@ -1,0 +1,25 @@
+{
+    "name": "kokst/core",
+    "description": "Core Module",
+    "authors": [
+        {
+            "name": "Nikolas Evers",
+            "email": "hello@nikol.as"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Kokst\\Core\\Providers\\CoreServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Kokst\\Core\\": ""
+        }
+    }
+}
