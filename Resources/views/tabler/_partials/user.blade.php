@@ -8,10 +8,10 @@
     </a>
     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
         <a class="dropdown-item" href="{!! url(config('tabler.urls.settings')) !!}">
-            <i class="dropdown-icon fe fe-settings"></i> @lang('user.settings')
+            <i class="dropdown-icon fe fe-settings"></i> @lang('core::user.settings')
         </a>
         <a class="dropdown-item" href="{!! url(config('tabler.urls.logout')) !!}">
-            <i class="dropdown-icon fe fe-log-out"></i> @lang('user.logout')
+            <i class="dropdown-icon fe fe-log-out"></i> @lang('core::user.logout')
         </a>
     </div>
 </div>
