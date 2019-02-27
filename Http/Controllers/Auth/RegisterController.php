@@ -2,7 +2,7 @@
 
 namespace Kokst\Core\Http\Controllers\Auth;
 
-use App\User;
+use Kokst\Core\Http\User;
 use Kokst\Core\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -69,9 +69,9 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return \Kokst\Core\Http\User
      */
-    protected function create(array $data)
+    public function create(array $data)
     {
         return User::create([
             'name' => $data['name'],

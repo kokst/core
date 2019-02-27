@@ -16,6 +16,11 @@
         "tabler/tabler": "^0.0.32",
         "thecodingmachine/safe": "^0.1.11"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^7.0",
+        "orchestra/testbench": "~3.0",
+        "laravel/homestead": "^8.1"
+    },
     "extra": {
         "laravel": {
             "providers": [

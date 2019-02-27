@@ -1,0 +1,5 @@
+/.vagrant
+/vendor
+Homestead.json
+Homestead.yaml
+/Tests/logs/*.log
