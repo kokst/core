@@ -2,6 +2,7 @@
 
 namespace Kokst\Core\Providers;
 
+use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
@@ -19,7 +20,7 @@ class CoreServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Router $router)
     {
         $this->registerTranslations();
         $this->registerConfig();
@@ -31,6 +32,11 @@ class CoreServiceProvider extends ServiceProvider
         $kernel = $this->app->make('Illuminate\Contracts\Http\Kernel');
         $kernel->pushMiddleware('Ecrmnn\LaravelHttps\Http\Middleware\ForceHttps');
         $kernel->pushMiddleware('Kokst\Core\Http\Middleware\DefineMenus');
+
+        $router->aliasMiddleware('guest', \Kokst\Core\Http\Middleware\RedirectIfAuthenticated::class);
+        $router->aliasMiddleware('auth', \Kokst\Core\Http\Middleware\Authenticate::class);
+        $router->aliasMiddleware('signed', \Illuminate\Routing\Middleware\ValidateSignature::class);
+        $router->aliasMiddleware('throttle', \Illuminate\Routing\Middleware\ThrottleRequests::class);
     }
 
     /**
@@ -85,13 +91,7 @@ class CoreServiceProvider extends ServiceProvider
      */
     public function registerTranslations()
     {
-        $langPath = resource_path('lang/modules/core');
-
-        if (is_dir($langPath)) {
-            $this->loadTranslationsFrom($langPath, 'core');
-        } else {
-            $this->loadTranslationsFrom(__DIR__ .'/../Resources/lang', 'core');
-        }
+        $this->loadTranslationsFrom(__DIR__ .'/../Resources/lang', 'core');
     }
 
     /**
@@ -104,15 +104,5 @@ class CoreServiceProvider extends ServiceProvider
         if (! app()->environment('production')) {
             app(Factory::class)->load(__DIR__ . '/../Database/factories');
         }
-    }
-
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return [];
     }
 }

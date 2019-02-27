@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Auth;
 
-use Kokst\Core\Tests\Stubs\User;
+use Kokst\Core\Http\User;
 use Illuminate\Support\Facades\Auth;
 use Kokst\Core\Tests\ModuleTestCase as TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;

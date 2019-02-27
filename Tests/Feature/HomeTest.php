@@ -2,7 +2,7 @@
 
 namespace Kokst\Core\Tests\Feature;
 
-use Kokst\Core\Tests\Stubs\User;
+use Kokst\Core\Http\User;
 use Kokst\Core\Tests\ModuleTestCase as TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 

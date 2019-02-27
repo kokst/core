@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Auth;
 
-use Kokst\Core\Tests\Stubs\User;
+use Kokst\Core\Http\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;

@@ -2,7 +2,7 @@
 
 namespace Kokst\Core\Tests;
 
-use Kokst\Core\Tests\Stubs\User;
+use Kokst\Core\Http\User;
 use Orchestra\Testbench\TestCase;
 use Illuminate\Support\Facades\View;
 

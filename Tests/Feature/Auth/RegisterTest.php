@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Auth;
 
-use Kokst\Core\Tests\Stubs\User;
+use Kokst\Core\Http\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
@@ -12,6 +12,11 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class RegisterTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function successfulRegistrationRoute()
+    {
+        return route('home');
+    }
 
     protected function registerGetRoute()
     {
@@ -43,6 +48,28 @@ class RegisterTest extends TestCase
         $response = $this->actingAs($user)->get($this->registerGetRoute());
 
         $response->assertRedirect($this->guestMiddlewareRoute());
+    }
+
+    public function testUserCanRegister()
+    {
+        Event::fake();
+
+        $response = $this->post($this->registerPostRoute(), [
+            'name' => 'John Doe',
+            'email' => 'john@example.com',
+            'password' => 'i-love-laravel',
+            'password_confirmation' => 'i-love-laravel',
+        ]);
+
+        $response->assertRedirect($this->successfulRegistrationRoute());
+        $this->assertCount(1, $users = User::all());
+        $this->assertAuthenticatedAs($user = $users->first());
+        $this->assertEquals('John Doe', $user->name);
+        $this->assertEquals('john@example.com', $user->email);
+        $this->assertTrue(Hash::check('i-love-laravel', $user->password));
+        Event::assertDispatched(Registered::class, function ($e) use ($user) {
+            return $e->user->id === $user->id;
+        });
     }
 
     public function testUserCannotRegisterWithoutName()
