@@ -20,6 +20,7 @@
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./Console</directory>
+            <directory suffix=".php">./Database</directory>
             <directory suffix=".php">./Http</directory>
             <directory suffix=".php">./Providers</directory>
         </whitelist>
