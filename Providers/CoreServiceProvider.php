@@ -32,6 +32,11 @@ class CoreServiceProvider extends ServiceProvider
         $kernel = $this->app->make('Illuminate\Contracts\Http\Kernel');
         $kernel->pushMiddleware('Ecrmnn\LaravelHttps\Http\Middleware\ForceHttps');
         $kernel->pushMiddleware('Kokst\Core\Http\Middleware\DefineMenus');
+
+        $router->aliasMiddleware('guest', \Kokst\Core\Http\Middleware\RedirectIfAuthenticated::class);
+        $router->aliasMiddleware('auth', \Kokst\Core\Http\Middleware\Authenticate::class);
+        $router->aliasMiddleware('signed', \Illuminate\Routing\Middleware\ValidateSignature::class);
+        $router->aliasMiddleware('throttle', \Illuminate\Routing\Middleware\ThrottleRequests::class);
     }
 
     /**
