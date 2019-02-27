@@ -7,10 +7,10 @@
         </span>
     </a>
     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-        <a class="dropdown-item" href="{!! url(config('tabler.urls.settings')) !!}">
+        <a class="dropdown-item" href="{!! url(config('tabler.urls.settings', 'settings')) !!}">
             <i class="dropdown-icon fe fe-settings"></i> @lang('core::user.settings')
         </a>
-        <a class="dropdown-item" href="{!! url(config('tabler.urls.logout')) !!}">
+        <a class="dropdown-item" href="{!! url(config('tabler.urls.logout', 'logout')) !!}">
             <i class="dropdown-icon fe fe-log-out"></i> @lang('core::user.logout')
         </a>
     </div>
