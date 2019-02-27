@@ -35,8 +35,6 @@ class CoreServiceProvider extends ServiceProvider
 
         $router->aliasMiddleware('guest', \Kokst\Core\Http\Middleware\RedirectIfAuthenticated::class);
         $router->aliasMiddleware('auth', \Kokst\Core\Http\Middleware\Authenticate::class);
-        $router->aliasMiddleware('signed', \Illuminate\Routing\Middleware\ValidateSignature::class);
-        $router->aliasMiddleware('throttle', \Illuminate\Routing\Middleware\ThrottleRequests::class);
     }
 
     /**
