@@ -1,1 +1,2 @@
 # core
+[![Build](https://api.travis-ci.com/kokst/core.svg?branch=master)](https://travis-ci.com/kokst/core) [![codecov](https://codecov.io/gh/kokst/core/branch/master/graph/badge.svg)](https://codecov.io/gh/kokst/core)
