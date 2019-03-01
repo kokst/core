@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "07d0506e1cb6d9d24fb48bed588e7f35",
+    "content-hash": "721f2328226fb4dafb856d70c6c9ca3f",
     "packages": [
         {
             "name": "danielstjules/stringy",
@@ -3068,34 +3068,6 @@
                 "dump"
             ],
             "time": "2019-01-30T11:44:30+00:00"
-        },
-        {
-            "name": "tabler/tabler",
-            "version": "v0.0.32",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tabler/tabler.git",
-                "reference": "a811ad1489360d0d443d9e8a0d1a0c292777c4a6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tabler/tabler/zipball/a811ad1489360d0d443d9e8a0d1a0c292777c4a6",
-                "reference": "a811ad1489360d0d443d9e8a0d1a0c292777c4a6",
-                "shasum": ""
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "codecalm",
-                    "email": "codecalm@gmail.com"
-                }
-            ],
-            "description": "Premium and Open Source dashboard template with responsive and high quality UI. For Free!",
-            "time": "2018-04-16T07:29:07+00:00"
         },
         {
             "name": "thecodingmachine/safe",
