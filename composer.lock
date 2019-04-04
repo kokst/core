@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "721f2328226fb4dafb856d70c6c9ca3f",
+    "content-hash": "52d2091e36f5a751cb7080b5eb1c0aa2",
     "packages": [
         {
             "name": "danielstjules/stringy",
@@ -1402,29 +1402,29 @@
         },
         {
             "name": "nwidart/laravel-modules",
-            "version": "4.0.0",
+            "version": "5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nWidart/laravel-modules.git",
-                "reference": "d487d9be3bfd6b7365678fd805d9ba5f0dd8295c"
+                "reference": "88bac6dd213a0fa04d2c6930fcde772d34956939"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nWidart/laravel-modules/zipball/d487d9be3bfd6b7365678fd805d9ba5f0dd8295c",
-                "reference": "d487d9be3bfd6b7365678fd805d9ba5f0dd8295c",
+                "url": "https://api.github.com/repos/nWidart/laravel-modules/zipball/88bac6dd213a0fa04d2c6930fcde772d34956939",
+                "reference": "88bac6dd213a0fa04d2c6930fcde772d34956939",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": ">=7.2"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.7",
-                "laravel/framework": "5.7.*",
+                "friendsofphp/php-cs-fixer": "^2.14",
+                "laravel/framework": "5.8.*",
                 "mockery/mockery": "~1.0",
-                "orchestra/testbench": "^3.7",
+                "orchestra/testbench": "^3.8",
                 "phpstan/phpstan": "^0.9.2",
-                "phpunit/phpunit": "~7.3",
-                "spatie/phpunit-snapshot-assertions": "^1.0"
+                "phpunit/phpunit": "~8.0",
+                "spatie/phpunit-snapshot-assertions": "^2.1.0"
             },
             "type": "library",
             "extra": {
@@ -1437,7 +1437,7 @@
                     }
                 },
                 "branch-alias": {
-                    "dev-master": "4.0-dev"
+                    "dev-master": "5.0-dev"
                 }
             },
             "autoload": {
@@ -1468,7 +1468,7 @@
                 "nwidart",
                 "rad"
             ],
-            "time": "2018-09-30T10:02:46+00:00"
+            "time": "2019-03-18T17:56:24+00:00"
         },
         {
             "name": "opis/closure",
@@ -2667,7 +2667,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "BackEndTea@gmail.com"
+                    "email": "backendtea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
