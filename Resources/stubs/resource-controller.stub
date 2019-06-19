@@ -1,0 +1,104 @@
+<?php
+
+namespace Modules\{{ Module }}\Http\Controllers;
+
+use Illuminate\Routing\Controller;
+use Modules\{{ Module }}\Entities\{{ Module }};
+use Illuminate\Support\Facades\Cache;
+
+class {{ Module }}Controller extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index()
+    {
+        ${{ ModulePluralSnake }} = Cache::remember('{{ ModulePluralSnake }}', 86400, function () {
+            return {{ Module }}::all();
+        });
+
+        return view('{{ ModuleLower }}::index', compact('{{ ModulePluralSnake }}'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function create()
+    {
+        return view('{{ ModuleLower }}::create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store()
+    {
+        {{ Module }}::create(
+            request()->validate([
+                'title' => ['required', 'min:3']
+            ])
+        );
+
+        return redirect('/{{ ModuleDash }}');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \Modules\{{ Module }}\Entities\{{ Module }}  ${{ ModuleSnake }}
+     * @return \Illuminate\View\View
+     */
+    public function show({{ Module }} ${{ ModuleSnake }})
+    {
+        return view('{{ ModuleLower }}::show', compact('{{ ModuleSnake }}'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \Modules\{{ Module }}\Entities\{{ Module }}  ${{ ModuleSnake }}
+     * @return \Illuminate\View\View
+     */
+    public function edit({{ Module }} ${{ ModuleSnake }})
+    {
+        return view('{{ ModuleLower }}::edit', compact('{{ ModuleSnake }}'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Modules\{{ Module }}\Entities\{{ Module }}  ${{ ModuleSnake }}
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update({{ Module }} ${{ ModuleSnake }})
+    {
+        request()->validate([
+            'title' => ['required', 'min:3']
+        ]);
+
+        ${{ ModuleSnake }}->update(request([
+            'title'
+        ]));
+
+        return redirect('/{{ ModuleDash }}/' . ${{ ModuleSnake }}->id);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \Modules\{{ Module }}\Entities\{{ Module }}  ${{ ModuleSnake }}
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy({{ Module }} ${{ ModuleSnake }})
+    {
+        ${{ ModuleSnake }}->delete();
+
+        return redirect('/{{ ModuleDash }}');
+    }
+}

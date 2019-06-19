@@ -1,0 +1,25 @@
+@extends('tabler.layouts.main')
+
+@section('title')
+    @lang('{{ ModuleLower }}::index.title')
+@stop
+
+@section('content')
+    @component(
+        'components.datatable.resource', [
+            'resource' => '{{ ModuleDash }}',
+            'collection' => ${{ ModulePluralSnake }},
+            'id' => true,
+            'title' => true,
+            'extrafields' => [],
+            'activity' => true,
+            'actions' => true,
+        ]
+    )
+
+        @slot('cardtitle')
+            @lang('{{ ModuleLower }}::index.title')
+        @endslot
+
+    @endcomponent
+@stop

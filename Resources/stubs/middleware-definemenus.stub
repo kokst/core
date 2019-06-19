@@ -1,0 +1,19 @@
+<?php
+
+namespace Modules\{{ Module }}\Http\Middleware;
+
+use Closure;
+use Lavary\Menu\Facade as Menu;
+
+class DefineMenus
+{
+    public function handle($request, Closure $next): object
+    {
+        $menu = Menu::get('primary') ?? Menu::make('primary', function () {
+        });
+
+        $menu->add(strval(__('{{ ModuleLower }}::index.title')), ['action' => '\Modules\{{ Module }}\Http\Controllers\{{ Module }}Controller@index']);
+
+        return $next($request);
+    }
+}

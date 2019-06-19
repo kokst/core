@@ -1,0 +1,14 @@
+{
+    "name": "{{ Module }}",
+    "alias": "{{ ModuleLower }}",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 1,
+    "providers": [
+        "Modules\\{{ Module }}\\Providers\\{{ Module }}ServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

@@ -1,0 +1,18 @@
+<?php
+
+namespace Modules\{{ Module }}\Http\Controllers;
+
+use Illuminate\View\View;
+use Illuminate\Routing\Controller;
+
+class {{ Module }}Controller extends Controller
+{
+    /**
+     * Display the index view of the module.
+     * @return View
+     */
+    public function index()
+    {
+        return view('{{ ModuleLower }}::index');
+    }
+}

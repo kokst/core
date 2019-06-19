@@ -1,0 +1,42 @@
+<?php
+
+namespace Modules\{{ Module }}\Observers;
+
+use Modules\{{ Module }}\Entities\{{ Module }};
+use Illuminate\Support\Facades\Cache;
+
+class {{ Module }}Observer
+{
+    /**
+     * Handle the {{ Module }} "created" event.
+     *
+     * @param  \Modules\{{ Module }}\Entities\{{ Module }}  ${{ ModuleSnake }}
+     * @return void
+     */
+    public function created({{ Module }} ${{ ModuleSnake }})
+    {
+        Cache::forget('{{ ModulePluralSnake }}');
+    }
+
+    /**
+     * Handle the {{ Module }} "updated" event.
+     *
+     * @param  \Modules\{{ Module }}\Entities\{{ Module }}  ${{ ModuleSnake }}
+     * @return void
+     */
+    public function updated({{ Module }} ${{ ModuleSnake }})
+    {
+        Cache::forget('{{ ModulePluralSnake }}');
+    }
+
+    /**
+     * Handle the {{ Module }} "deleted" event.
+     *
+     * @param  \Modules\{{ Module }}\Entities\{{ Module }}  ${{ ModuleSnake }}
+     * @return void
+     */
+    public function deleted({{ Module }} ${{ ModuleSnake }})
+    {
+        Cache::forget('{{ ModulePluralSnake }}');
+    }
+}
