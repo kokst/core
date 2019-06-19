@@ -1,6 +1,6 @@
 {
     "name": "kokst/core",
-    "description": "Core Module",
+    "description": "Kok Core",
     "authors": [
         {
             "name": "Nikolas Evers",
@@ -8,26 +8,13 @@
         }
     ],
     "require": {
-        "ecrmnn/laravel-https": "^1.0",
-        "laravelcollective/html": "^5.7",
-        "laravolt/avatar": "^2.1",
-        "lavary/laravel-menu": "^1.7",
-        "nwidart/laravel-modules": "^4.0",
-        "thecodingmachine/safe": "^0.1.11"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^7.0",
-        "orchestra/testbench": "~3.0",
-        "laravel/homestead": "^8.1"
+        "tabler/tabler": "0.0.33"
     },
     "extra": {
         "laravel": {
             "providers": [
                 "Kokst\\Core\\Providers\\CoreServiceProvider"
-            ],
-            "aliases": {
-                
-            }
+            ]
         }
     },
     "autoload": {
