@@ -4,9 +4,7 @@ matrix:
   fast_finish: true
   include:
     - php: 7.2
-      env: PHPUNIT_FLAGS=--coverage-clover=clover.xml
     - php: 7.3
-      env: PHPUNIT_FLAGS=--coverage-clover=clover.xml
     - php: 7.4snapshot
     - php: nightly
       env: COMPOSER_INSTALL_FLAGS=--ignore-platform-reqs
