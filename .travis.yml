@@ -12,6 +12,10 @@ matrix:
     - php: 7.4snapshot
     - php: nightly
 
+branches:
+  only:
+    - master
+
 script:
   - travis_retry composer install --no-interaction --prefer-dist ${COMPOSER_INSTALL_FLAGS}
 
