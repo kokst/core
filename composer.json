@@ -1,6 +1,7 @@
 {
     "name": "kokst/core",
     "description": "Kok Core",
+    "license": "MIT",
     "authors": [
         {
             "name": "Nikolas Evers",
