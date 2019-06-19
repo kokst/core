@@ -1,1 +1,0 @@
-@extends('core::tabler.auth.login')
