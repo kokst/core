@@ -6,7 +6,7 @@
 
 @section('content')
     @component(
-        'components.datatable.resource', [
+        'vendor.kokst.core.components.datatable.resource', [
             'resource' => '{{ ModuleDash }}',
             'collection' => ${{ ModulePluralSnake }},
             'id' => true,
