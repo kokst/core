@@ -17,4 +17,13 @@ class CoreServiceProvider extends ServiceProvider
             \Kokst\Core\Console\Commands\MakeModuleCommand::class,
         ]);
     }
+
+    public function boot()
+    {
+        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'core');
+
+        $this->publishes([
+            __DIR__ . '/../Resources/views' => resource_path('views/vendor/kokst/core'),
+        ]);
+    }
 }
