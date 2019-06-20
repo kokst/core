@@ -1,6 +1,6 @@
 {{--
     @component(
-        'components.datatable.resource', [
+        'vendor.kokst.core.components.datatable.resource', [
             'resource' => 'resource',
             'collection' => $collection,
             'id' => true,
@@ -29,7 +29,7 @@
                 </h3>
                 <div class="card-options">
                     @if($collection->first())
-                        <input id="search" type="text" autocomplete="off" class="form-control form-control ml-2" placeholder="@lang('components/datatable/index.search')">
+                        <input id="search" type="text" autocomplete="off" class="form-control form-control ml-2" placeholder="@lang('vendor/kokst/core/components/datatable/index.search')">
                     @endif
                 </div>
             </div>
@@ -45,11 +45,11 @@
                     <thead>
                         <tr>
                             @if($id)
-                                <th class="w-1">@lang('components/datatable/index.id')</th>
+                                <th class="w-1">@lang('vendor/kokst/core/components/datatable/index.id')</th>
                             @endif
 
                             @if($title)
-                                <th>@lang('components/datatable/index.title')</th>
+                                <th>@lang('vendor/kokst/core/components/datatable/index.title')</th>
                             @endif
 
                             @foreach($extrafields as $extrafield)
@@ -59,7 +59,7 @@
                             @endforeach
 
                             @if($activity)
-                                <th>@lang('components/datatable/index.activity')</th>
+                                <th>@lang('vendor/kokst/core/components/datatable/index.activity')</th>
                             @endif
 
                             @if($actions)
@@ -110,14 +110,14 @@
                                         <div class="item-action dropdown">
                                             <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                            <a href="{{ route($resource . '.show', ['id'=> $model->id]) }}" class="dropdown-item"><i class="dropdown-icon fe fe-eye"></i> @lang('components/datatable/index.view') </a>
-                                            <a href="{{ route($resource . '.edit', ['id'=> $model->id]) }}" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> @lang('components/datatable/index.edit') </a>
+                                            <a href="{{ route($resource . '.show', ['id'=> $model->id]) }}" class="dropdown-item"><i class="dropdown-icon fe fe-eye"></i> @lang('vendor/kokst/core/components/datatable/index.view') </a>
+                                            <a href="{{ route($resource . '.edit', ['id'=> $model->id]) }}" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> @lang('vendor/kokst/core/components/datatable/index.edit') </a>
                                             <div class="dropdown-divider"></div>
                                             <form method="POST" action="/{{ $resource }}/{{ $model->id }}">
                                                 @csrf
                                                 @method('DELETE')
 
-                                                <button type="submit" class="dropdown-item"><i class="dropdown-icon fe fe-trash"></i> @lang('components/datatable/index.delete')</button>
+                                                <button type="submit" class="dropdown-item"><i class="dropdown-icon fe fe-trash"></i> @lang('vendor/kokst/core/components/datatable/index.delete')</button>
                                             </form>
                                             </div>
                                         </div>
@@ -190,10 +190,10 @@
                 }],
 
                 "language": {
-                    "zeroRecords": "@lang('components/datatable/index.zero')",
+                    "zeroRecords": "@lang('vendor/kokst/core/components/datatable/index.zero')",
                     "paginate": {
-                        "first": "@lang('components/datatable/index.first')",
-                        "last": "@lang('components/datatable/index.last')",
+                        "first": "@lang('vendor/kokst/core/components/datatable/index.first')",
+                        "last": "@lang('vendor/kokst/core/components/datatable/index.last')",
                         "next": '<i class="fe fe-arrow-right"></i>',
                         "previous": '<i class="fe fe-arrow-left"></i>'
                     },

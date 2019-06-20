@@ -1,5 +1,5 @@
 {{--
-    @component('components.form.select', [
+    @component('vendor.kokst.core.components.form.select', [
         'collection' => $posts,
         'id' => 'post_id',
         'label' => 'Posts',

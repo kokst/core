@@ -1,5 +1,5 @@
 {{--
-    @component('components.form.form', [
+    @component('vendor.kokst.core.components.form.form', [
         'resource' => 'post',
         'type' => 'create', // or 'edit'
         'model' => $post, // if edit

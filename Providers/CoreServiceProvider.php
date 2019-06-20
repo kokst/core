@@ -20,6 +20,12 @@ class CoreServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'core');
+
+        $this->publishes([
+            __DIR__ . '/../Resources/lang/en' => resource_path('lang/en/vendor/kokst/core'),
+        ]);
+
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'core');
 
         $this->publishes([
