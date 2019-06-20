@@ -1,0 +1,19 @@
+<?php
+
+namespace Modules\{{ Module }}\Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Modules\{{ Module }}\Entities\{{ Module }};
+
+class {{ Module }}TableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        factory({{ Module }}::class, 25)->create();
+    }
+}

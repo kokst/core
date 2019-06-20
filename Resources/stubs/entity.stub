@@ -1,0 +1,22 @@
+<?php
+
+namespace Modules\{{ Module }}\Entities;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use McCool\LaravelAutoPresenter\HasPresenter;
+use Modules\{{ Module }}\Presenters\{{ Module }}Presenter;
+
+class {{ Module }} extends Model implements HasPresenter
+{
+    use SoftDeletes;
+
+    protected $fillable = [
+        'title'
+    ];
+
+    public function getPresenterClass()
+    {
+        return {{ Module }}Presenter::class;
+    }
+}

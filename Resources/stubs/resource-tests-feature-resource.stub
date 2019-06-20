@@ -1,0 +1,93 @@
+<?php
+
+namespace Modules\{{ Module }}\Tests\Feature;
+
+use App\User;
+use Tests\TestCase;
+use Modules\{{ Module }}\Entities\{{ Module }};
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+class ResourceTest extends TestCase
+{
+    use RefreshDatabase;
+
+    protected function createGetRoute()
+    {
+        return route('{{ ModuleDash }}.create');
+    }
+
+    protected function createPostRoute()
+    {
+        return route('{{ ModuleDash }}.store');
+    }
+
+    protected function indexRoute()
+    {
+        return route('{{ ModuleDash }}.index');
+    }
+
+    protected function loginGetRoute()
+    {
+        return route('login');
+    }
+
+    protected function loginPostRoute()
+    {
+        return route('login');
+    }
+
+    public function testRedirectToLoginIfNotAuthenticated()
+    {
+        $response = $this->get($this->createGetRoute());
+        $response->assertRedirect($this->loginGetRoute());
+    }
+
+    public function testUserCanViewIndexIfAuthenticated()
+    {
+        $user = factory(User::class)->create([
+            'password' => Hash::make($password = 'i-love-laravel'),
+        ]);
+
+        $response = $this->post($this->loginPostRoute(), [
+            'email' => $user->email,
+            'password' => $password,
+        ]);
+
+        $this->assertAuthenticatedAs($user);
+
+        $response = $this->get($this->createGetRoute());
+        $response->assertStatus(200);
+    }
+
+    public function testCanCreateIfAuthenticated()
+    {
+        $this->assertNull({{ Module }}::first());
+
+        $user = factory(User::class)->create([
+            'password' => Hash::make($password = 'i-love-laravel'),
+        ]);
+
+        $this->post($this->loginPostRoute(), [
+            'email' => $user->email,
+            'password' => $password,
+        ]);
+
+        $this->assertAuthenticatedAs($user);
+
+        ${{ ModuleSnake }} = factory({{ Module }}::class)->create();
+
+        $response = $this->post($this->createPostRoute(), [
+            'title' => ${{ ModuleSnake }}->title,
+        ]);
+
+        $response->assertStatus(302);
+        $response = $this->get($this->indexRoute());
+
+        $first = {{ Module }}::first();
+
+        $this->assertInstanceOf({{ Module }}::class, $first);
+        $this->assertEquals(${{ ModuleSnake }}->title, $first->title);
+
+    }
+}

@@ -1,0 +1,7 @@
+<?php
+
+return [
+    'title' => 'Create {{ Module }}',
+    'title-placeholder' => 'Title',
+    'submit' => 'Create {{ Module }}',
+];

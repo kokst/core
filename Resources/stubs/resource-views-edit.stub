@@ -1,0 +1,68 @@
+@extends('tabler.layouts.main')
+
+@section('content')
+    <form class="card" method="POST" action="/{{ ModuleDash }}/{{ ${{ ModuleSnake }}->id }}">
+        @csrf
+        @method('PATCH')
+
+        <div class="card-header">
+            @if ($errors->any())
+                <div class="card-status card-status-left bg-red"></div>
+            @endif
+            <h3 class="card-title">@lang('{{ ModuleLower }}::edit.title')</h3>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label class="form-label">@lang('{{ ModuleLower }}::create.title-placeholder')</label>
+                        <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}"
+                               type="text"
+                               name="title"
+                               placeholder="@lang('{{ ModuleLower }}::create.title-placeholder')"
+                               value="{{ old('title', ${{ ModulePluralSnake }}->title) }}"
+                               required>
+                        @if ($errors->has('title'))
+                            <span class="invalid-feedback">
+                                <strong>{{ $errors->first('title') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <div class="d-flex">
+                <a href="{{ route('{{ ModuleDash }}.show', ['id' => ${{ ModuleSnake }}->id]) }}" class="btn btn-link">@lang('{{ ModuleLower }}::edit.cancel')</a>
+
+                <div class="btn-list ml-auto">
+                    <button type="submit" class="btn btn-primary">@lang('{{ ModuleLower }}::edit.submit')</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <form method="POST" action="/{{ ModuleDash }}/{{ ${{ ModuleSnake }}->id }}">
+        @csrf
+        @method('DELETE')
+
+        <div class="card card-collapsed">
+            <div class="card-header">
+                <h3 class="card-title">Danger Zone</h3>
+                <div class="card-options">
+                    <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-outline-danger">@lang('{{ ModuleLower }}::edit.destroy')</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+@stop

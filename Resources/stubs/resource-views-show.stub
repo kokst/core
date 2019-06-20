@@ -1,0 +1,18 @@
+@extends('tabler.layouts.main')
+
+@section('content')
+    <div class="row row-cards">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        {{ ${{ ModuleSnake }}->title }}
+                    </h3>
+                    <div class="card-options">
+                        <a href="{{ route('{{ ModuleLower }}.edit', ['id' => ${{ ModuleSnake }}->id]) }}" class="btn btn-secondary btn-sm ml-2">Bearbeiten</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@stop

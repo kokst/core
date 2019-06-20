@@ -9,7 +9,8 @@
         }
     ],
     "require": {
-        "tabler/tabler": "0.0.33"
+        "tabler/tabler": "0.0.33",
+        "mccool/laravel-auto-presenter": "^7.2"
     },
     "extra": {
         "laravel": {
