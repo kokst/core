@@ -2,7 +2,7 @@
 
 namespace Modules\{{ Module }}\Presenters;
 
-use App\Traits\ActivityPresenter;
+use Kokst\Core\Traits\ActivityPresenter;
 use McCool\LaravelAutoPresenter\BasePresenter;
 
 class {{ Module }}Presenter extends BasePresenter
