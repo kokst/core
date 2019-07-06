@@ -274,6 +274,7 @@ class MakeModuleCommand extends Command
 
         file_put_contents("$path/create.php", $this->replaceContent('resource-lang-en-create'));
         file_put_contents("$path/edit.php", $this->replaceContent('resource-lang-en-edit'));
+        file_put_contents("$path/index.php", $this->replaceContent('resource-lang-en-index'));
     }
 
     protected function createResourceViews()
