@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'title' => '{{ Module }}',
+    'title' => '{{ ModulePlural }}',
     'text' => 'This view is loaded from module',
 ];
