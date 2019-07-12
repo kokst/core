@@ -23,6 +23,7 @@ class {{ Module }}Controller extends Controller
             'resource' => '{{ ModuleDash }}',
             'collection' => ${{ ModulePluralSnake }},
             'header' => __('{{ ModuleLower }}::index.title'),
+            'basic' => {{ Basic }},
         ]);
     }
 

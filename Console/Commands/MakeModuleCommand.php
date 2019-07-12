@@ -10,7 +10,7 @@ use Illuminate\Filesystem\Filesystem;
 
 class MakeModuleCommand extends Command
 {
-    protected $signature = 'kok:make-module {name*} {--R|resource}';
+    protected $signature = 'kok:make-module {name*} {--R|resource} {--B|basic}';
 
     protected $description = 'Create a new module.';
 
@@ -34,6 +34,8 @@ class MakeModuleCommand extends Command
 
     protected $modulesPath;
 
+    protected $basic;
+
     public function __construct(Filesystem $files)
     {
         parent::__construct();
@@ -51,8 +53,8 @@ class MakeModuleCommand extends Command
     protected function replaceContent($stub)
     {
         $content = str_replace(
-            ['{{ Module }}', '{{ ModuleDash }}', '{{ ModuleLower }}', '{{ ModulePlural }}', '{{ ModulePluralLower }}', '{{ ModulePluralSnake }}', '{{ ModuleSnake }}'],
-            [$this->module, $this->moduleDashcase, $this->moduleLowercase, $this->modulePlural, $this->modulePluralLowercase, $this->modulePluralSnakecase, $this->moduleSnakecase],
+            ['{{ Module }}', '{{ ModuleDash }}', '{{ ModuleLower }}', '{{ ModulePlural }}', '{{ ModulePluralLower }}', '{{ ModulePluralSnake }}', '{{ ModuleSnake }}', '{{ Basic }}'],
+            [$this->module, $this->moduleDashcase, $this->moduleLowercase, $this->modulePlural, $this->modulePluralLowercase, $this->modulePluralSnakecase, $this->moduleSnakecase, $this->basic],
             $this->getStub($stub)
         );
 
@@ -71,6 +73,13 @@ class MakeModuleCommand extends Command
     {
         $names = (array) $this->argument('name');
         $resource = $this->option('resource');
+        $basic = $this->option('basic');
+
+        if (!$resource && $basic) {
+            $this->warn('Warning: Ignoring Basic option (-B / --basic); only available for Resource modules (-R / --resource)');
+        }
+
+        $this->basic = $basic ? 'true' : 'false';
 
         $bar = $this->output->createProgressBar(count($names));
         $bar->start();
@@ -283,7 +292,6 @@ class MakeModuleCommand extends Command
         $path = $this->modulePath . "Resources" . DIRECTORY_SEPARATOR . "views";
         $this->makeDirectory($path . DIRECTORY_SEPARATOR . "dir");
 
-        file_put_contents("$path/index.blade.php", $this->replaceContent('resource-views-index'));
         file_put_contents("$path/show.blade.php", $this->replaceContent('resource-views-show'));
     }
 
