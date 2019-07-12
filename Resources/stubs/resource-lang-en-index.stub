@@ -2,5 +2,4 @@
 
 return [
     'title' => '{{ ModulePlural }}',
-    'text' => 'This view is loaded from module',
 ];

@@ -274,6 +274,7 @@ class MakeModuleCommand extends Command
 
         file_put_contents("$path/create.php", $this->replaceContent('resource-lang-en-create'));
         file_put_contents("$path/edit.php", $this->replaceContent('resource-lang-en-edit'));
+        file_put_contents("$path/form.php", $this->replaceContent('resource-lang-en-form'));
         file_put_contents("$path/index.php", $this->replaceContent('resource-lang-en-index'));
     }
 
@@ -283,8 +284,6 @@ class MakeModuleCommand extends Command
         $this->makeDirectory($path . DIRECTORY_SEPARATOR . "dir");
 
         file_put_contents("$path/index.blade.php", $this->replaceContent('resource-views-index'));
-        file_put_contents("$path/create.blade.php", $this->replaceContent('resource-views-create'));
-        file_put_contents("$path/edit.blade.php", $this->replaceContent('resource-views-edit'));
         file_put_contents("$path/show.blade.php", $this->replaceContent('resource-views-show'));
     }
 
