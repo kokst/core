@@ -2,42 +2,50 @@
 
 namespace Modules\{{ Module }}\Http\Controllers;
 
+use Illuminate\View\View;
 use Illuminate\Routing\Controller;
 use Modules\{{ Module }}\Entities\{{ Module }};
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Cache;
 
 class {{ Module }}Controller extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(): View
     {
         ${{ ModulePluralSnake }} = Cache::remember('{{ ModulePluralSnake }}', 86400, function () {
             return {{ Module }}::all();
         });
 
-        return view('{{ ModuleLower }}::index', compact('{{ ModulePluralSnake }}'));
+        return view('vendor.kokst.core.resource.index', [
+            'resource' => '{{ ModuleDash }}',
+            'collection' => ${{ ModulePluralSnake }},
+            'header' => __('{{ ModuleLower }}::index.title'),
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(): View
     {
-        return view('{{ ModuleLower }}::create');
+        return view('vendor.kokst.core.resource.form', [
+            'resource' => '{{ ModuleDash }}',
+            'type' => 'create',
+            'namespace' => '{{ ModuleDash }}',
+            'fields' => [
+                'title' => ['type' => 'text', 'required' => true],
+            ],
+            'header' => __('{{ ModuleLower }}::create.title'),
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store()
+    public function store(): RedirectResponse
     {
         {{ Module }}::create(
             request()->validate([
@@ -50,33 +58,33 @@ class {{ Module }}Controller extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \Modules\{{ Module }}\Entities\{{ Module }}  ${{ ModuleSnake }}
-     * @return \Illuminate\View\View
      */
-    public function show({{ Module }} ${{ ModuleSnake }})
+    public function show({{ Module }} ${{ ModuleSnake }}): View
     {
         return view('{{ ModuleLower }}::show', compact('{{ ModuleSnake }}'));
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \Modules\{{ Module }}\Entities\{{ Module }}  ${{ ModuleSnake }}
-     * @return \Illuminate\View\View
      */
-    public function edit({{ Module }} ${{ ModuleSnake }})
+    public function edit({{ Module }} ${{ ModuleSnake }}): View
     {
-        return view('{{ ModuleLower }}::edit', compact('{{ ModuleSnake }}'));
+        return view('vendor.kokst.core.resource.form', [
+            'resource' => '{{ ModuleDash }}',
+            'type' => 'edit',
+            'model' => ${{ ModuleSnake }},
+            'namespace' => '{{ ModuleDash }}',
+            'fields' => [
+                'title' => ['type' => 'text', 'required' => true],
+            ],
+            'header' => __('{{ ModuleLower }}::edit.title'),
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Modules\{{ Module }}\Entities\{{ Module }}  ${{ ModuleSnake }}
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update({{ Module }} ${{ ModuleSnake }})
+    public function update({{ Module }} ${{ ModuleSnake }}): RedirectResponse
     {
         request()->validate([
             'title' => ['required', 'min:3']
@@ -91,11 +99,8 @@ class {{ Module }}Controller extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \Modules\{{ Module }}\Entities\{{ Module }}  ${{ ModuleSnake }}
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy({{ Module }} ${{ ModuleSnake }})
+    public function destroy({{ Module }} ${{ ModuleSnake }}): RedirectResponse
     {
         ${{ ModuleSnake }}->delete();
 
