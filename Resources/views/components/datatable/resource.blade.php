@@ -10,6 +10,7 @@
             ],
             'activity' => true,
             'actions' => true,
+            'basic' => false,
         ]
     )
 
@@ -80,7 +81,11 @@
 
                                 @if($title)
                                     <td>
-                                        <a href="{{ route($resource . '.show', ['id'=> $model->id]) }}" class="text-inherit">
+                                        @if($basic)
+                                            <a href="{{ route($resource . '.edit', ['id'=> $model->id]) }}" class="text-inherit">
+                                        @else
+                                            <a href="{{ route($resource . '.show', ['id'=> $model->id]) }}" class="text-inherit">
+                                        @endif
                                             {{ $model->title }}
                                         </a>
                                     </td>
@@ -106,22 +111,26 @@
                                 @endif
 
                                 @if($actions)
-                                    <td class="text-center">
-                                        <div class="item-action dropdown">
-                                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                            <a href="{{ route($resource . '.show', ['id'=> $model->id]) }}" class="dropdown-item"><i class="dropdown-icon fe fe-eye"></i> @lang('vendor/kokst/core/components/datatable/index.view') </a>
-                                            <a href="{{ route($resource . '.edit', ['id'=> $model->id]) }}" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> @lang('vendor/kokst/core/components/datatable/index.edit') </a>
-                                            <div class="dropdown-divider"></div>
-                                            <form method="POST" action="/{{ $resource }}/{{ $model->id }}">
-                                                @csrf
-                                                @method('DELETE')
+                                    @if($basic)
+                                        <td class="w-1"><a href="{{ route($resource . '.edit', ['id'=> $model->id]) }}" class="icon"><i class="fe fe-edit"></i></a></td>
+                                    @else
+                                        <td class="text-center">
+                                            <div class="item-action dropdown">
+                                                <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                <a href="{{ route($resource . '.show', ['id'=> $model->id]) }}" class="dropdown-item"><i class="dropdown-icon fe fe-eye"></i> @lang('vendor/kokst/core/components/datatable/index.view') </a>
+                                                <a href="{{ route($resource . '.edit', ['id'=> $model->id]) }}" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> @lang('vendor/kokst/core/components/datatable/index.edit') </a>
+                                                <div class="dropdown-divider"></div>
+                                                <form method="POST" action="/{{ $resource }}/{{ $model->id }}">
+                                                    @csrf
+                                                    @method('DELETE')
 
-                                                <button type="submit" class="dropdown-item"><i class="dropdown-icon fe fe-trash"></i> @lang('vendor/kokst/core/components/datatable/index.delete')</button>
-                                            </form>
+                                                    <button type="submit" class="dropdown-item"><i class="dropdown-icon fe fe-trash"></i> @lang('vendor/kokst/core/components/datatable/index.delete')</button>
+                                                </form>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
+                                        </td>
+                                        @endif
                                 @endif
                             </tr>
                         @endforeach

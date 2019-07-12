@@ -4,5 +4,4 @@ return [
     'title' => 'Edit {{ Module }}',
     'destroy' => 'Delete {{ Module }}',
     'submit' => 'Save {{ Module }}',
-    'cancel' => 'Cancel'
 ];
