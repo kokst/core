@@ -5,6 +5,7 @@ return [
     'id' => 'ID',
     'title' => 'Title',
     'activity' => 'Activity',
+    'roles' => 'Roles',
     'updated' => 'Updated',
     'created' => 'Created',
     'view' => 'View',
