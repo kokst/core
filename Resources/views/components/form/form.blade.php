@@ -3,6 +3,7 @@
         'resource' => 'post',
         'type' => 'create', // or 'edit'
         'model' => $post, // if edit
+        'softdelete' => true, // optional
         'namespace' => 'post' // optional
         'fields' => [
             'title' => ['type' => 'text', 'required' => true],
@@ -33,30 +34,47 @@
             <div class="col-12">
                 @foreach($fields as $field => $options)
                     <div class="form-group">
-                        <label class="form-label">@lang((isset($namespace) ? "${namespace}::" : '') . 'form.' . $field . '-placeholder')</label>
+                        <label class="form-label" for="{{ $field }}">@lang((isset($namespace) ? "${namespace}::" : '') . 'form.' . $field . '-placeholder')</label>
+
+                        @if($options['type'] === 'text')
+                            <input class="form-control {{ $errors->has($field) ? 'is-invalid' : '' }}"
+                                type="text"
+                                id="{{ $field }}"
+                                name="{{ $field }}"
+                                placeholder="@lang((isset($namespace) ? "${namespace}::" : '') . 'form.' . $field . '-placeholder')"
+                                value="{{ old($field, $type === 'edit' && isset($model->$field) ? $model->$field : null) }}"
+
+                                @if ($loop->first)
+                                    autofocus
+                                @endif
+
+                                @if(isset($options['required']) && $options['required'])
+                                    required
+                                @endif>
+                        @elseif($options['type'] === 'password')
+                            <input class="form-control {{ $errors->has($field) ? 'is-invalid' : '' }}"
+                                type="password"
+                                id="{{ $field }}"
+                                name="{{ $field }}"
+                                placeholder="@lang((isset($namespace) ? "${namespace}::" : '') . 'form.' . $field . '-placeholder')"
+                                value="{{ old($field, $type === 'edit' && isset($model->$field) ? $model->$field : null) }}"
+
+                                @if ($loop->first)
+                                    autofocus
+                                @endif
+
+                                @if(isset($options['required']) && $options['required'])
+                                    required
+                                @endif>
+                        @endif
+
+                        @if ($errors->has($field))
+                            <span class="invalid-feedback">
+                                <strong>{{ $errors->first($field) }}</strong>
+                            </span>
+                        @endif
+
                     </div>
-
-                    @if($options['type'] === 'text')
-                        <input class="form-control {{ $errors->has($field) ? 'is-invalid' : '' }}"
-                               type="text"
-                               name="{{ $field }}"
-                               placeholder="@lang((isset($namespace) ? "${namespace}::" : '') . 'form.' . $field . '-placeholder')"
-                               value="{{ old($field, $type === 'edit' && isset($model->$field) ? $model->$field : null) }}"
-
-                               @if ($loop->first)
-                                   autofocus
-                               @endif
-
-                               @if(isset($options['required']) && $options['required'])
-                                   required
-                               @endif>
-                    @endif
-
-                    @if ($errors->has($field))
-                        <span class="invalid-feedback">
-                            <strong>{{ $errors->first($field) }}</strong>
-                        </span>
-                    @endif
                 @endforeach
             </div>
         </div>
@@ -70,7 +88,11 @@
             @endif
 
             @if($type === 'edit')
-                <a href="{{ route($resource . '.show', ['id' => $model->id]) }}" class="btn btn-link">@lang((isset($namespace) ? "${namespace}::" : '') . 'form.cancel')</a>
+                @if($basic)
+                    <a href="{{ route($resource . '.index') }}" class="btn btn-link">@lang((isset($namespace) ? "${namespace}::" : '') . 'form.cancel')</a>
+                @else
+                    <a href="{{ route($resource . '.show', ['id' => $model->id]) }}" class="btn btn-link">@lang((isset($namespace) ? "${namespace}::" : '') . 'form.cancel')</a>
+                @endif
 
                 <div class="btn-list ml-auto">
                     <button type="submit" class="btn btn-primary">@lang((isset($namespace) ? "${namespace}::" : '') . $type . '.submit')</button>
@@ -96,7 +118,11 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-12">
-                        <button type="submit" class="btn btn-outline-danger">@lang((isset($namespace) ? "${namespace}::" : '') . $type . '.destroy')</button>
+                        @if($softdelete)
+                            <button type="submit" class="btn btn-outline-danger">@lang((isset($namespace) ? "${namespace}::" : '') . $type . '.archive')</button>
+                        @else
+                            <button type="submit" class="btn btn-outline-danger">@lang((isset($namespace) ? "${namespace}::" : '') . $type . '.destroy')</button>
+                        @endif
                     </div>
                 </div>
             </div>

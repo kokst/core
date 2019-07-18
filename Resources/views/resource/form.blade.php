@@ -10,7 +10,9 @@
         'type' => $type,
         'model' => isset($model) ? $model : null,
         'namespace' => isset($namespace) ? $namespace : null,
+        'softdelete' => (isset($softdelete) && $softdelete === false) ? false : true,
         'fields' => isset($fields) ? $fields : [],
+        'basic' => (isset($basic) && $basic === true) ? true : false,
     ])
     @endcomponent
 @stop

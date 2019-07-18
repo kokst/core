@@ -15,6 +15,7 @@
             'activity' => (isset($activity) && $activity === false) ? false : true,
             'actions' => (isset($actions) && $actions === false) ? false : true,
             'basic' => (isset($basic) && $basic === true) ? true : false,
+            'roles' => (isset($roles) && $roles === true) ? true : false,
         ]
     )
 

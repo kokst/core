@@ -11,6 +11,7 @@
             'activity' => true,
             'actions' => true,
             'basic' => false,
+            'roles' => false,
         ]
     )
 
@@ -59,6 +60,10 @@
                                 </th>
                             @endforeach
 
+                            @if($roles)
+                                <th>@lang('vendor/kokst/core/components/datatable/index.roles')</th>
+                            @endif
+
                             @if($activity)
                                 <th>@lang('vendor/kokst/core/components/datatable/index.activity')</th>
                             @endif
@@ -98,6 +103,14 @@
                                         </div>
                                     </td>
                                 @endforeach
+
+                                @if($roles)
+                                    <td>
+                                        <div>
+                                            {{ $model->roles->pluck('name')->implode(', ') }}
+                                        </div>
+                                    </td>
+                                @endif
 
                                 @if($activity)
                                     <td data-order="{{ $model->activityData }}">

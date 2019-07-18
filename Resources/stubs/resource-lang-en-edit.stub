@@ -2,6 +2,7 @@
 
 return [
     'title' => 'Edit {{ Module }}',
+    'archive' => 'Archive {{ Module }}',
     'destroy' => 'Delete {{ Module }}',
     'submit' => 'Save {{ Module }}',
 ];
