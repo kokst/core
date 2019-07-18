@@ -107,7 +107,7 @@
                                 @if($roles)
                                     <td>
                                         <div>
-                                            {{ $model->getRoleNames()[0] }}
+                                            {{ $model->roles->pluck('name')->implode(', ') }}
                                         </div>
                                     </td>
                                 @endif
