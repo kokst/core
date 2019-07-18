@@ -51,6 +51,21 @@
                                 @if(isset($options['required']) && $options['required'])
                                     required
                                 @endif>
+                        @elseif($options['type'] === 'password')
+                            <input class="form-control {{ $errors->has($field) ? 'is-invalid' : '' }}"
+                                type="password"
+                                id="{{ $field }}"
+                                name="{{ $field }}"
+                                placeholder="@lang((isset($namespace) ? "${namespace}::" : '') . 'form.' . $field . '-placeholder')"
+                                value="{{ old($field, $type === 'edit' && isset($model->$field) ? $model->$field : null) }}"
+
+                                @if ($loop->first)
+                                    autofocus
+                                @endif
+
+                                @if(isset($options['required']) && $options['required'])
+                                    required
+                                @endif>
                         @endif
 
                         @if ($errors->has($field))
