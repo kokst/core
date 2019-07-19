@@ -34,9 +34,9 @@
             <div class="col-12">
                 @foreach($fields as $field => $options)
                     <div class="form-group">
-                        <label class="form-label" for="{{ $field }}">@lang((isset($namespace) ? "${namespace}::" : '') . 'form.' . $field . '-placeholder')</label>
-
                         @if($options['type'] === 'text')
+                            <label class="form-label" for="{{ $field }}">@lang((isset($namespace) ? "${namespace}::" : '') . 'form.' . $field . '-placeholder')</label>
+
                             <input class="form-control {{ $errors->has($field) ? 'is-invalid' : '' }}"
                                 type="text"
                                 id="{{ $field }}"
@@ -52,6 +52,8 @@
                                     required
                                 @endif>
                         @elseif($options['type'] === 'password')
+                            <label class="form-label" for="{{ $field }}">@lang((isset($namespace) ? "${namespace}::" : '') . 'form.' . $field . '-placeholder')</label>
+
                             <input class="form-control {{ $errors->has($field) ? 'is-invalid' : '' }}"
                                 type="password"
                                 id="{{ $field }}"
@@ -66,6 +68,16 @@
                                 @if(isset($options['required']) && $options['required'])
                                     required
                                 @endif>
+                        @elseif($options['type'] === 'select')
+                            @component('vendor.kokst.core.components.form.select', [
+                                'collection' => $options['collection'],
+                                'id' => $field,
+                                'label' => __((isset($namespace) ? "${namespace}::" : '') . 'form.' . $field . '-placeholder'),
+                                'old' => isset($options['old']) ? $options['old'] : null,
+                                'placeholder' => isset($options['placeholder']) ? $options['placeholder'] : 'null',
+                                'required' => isset($options['required']) && $options['required'] === true ? true : false,
+                            ])
+                            @endcomponent
                         @endif
 
                         @if ($errors->has($field))
@@ -73,7 +85,6 @@
                                 <strong>{{ $errors->first($field) }}</strong>
                             </span>
                         @endif
-
                     </div>
                 @endforeach
             </div>
