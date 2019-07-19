@@ -3,6 +3,7 @@
         'collection' => $posts,
         'id' => 'post_id',
         'label' => 'Posts',
+        'old' => $old->id,
         'placeholder' => 'Please select a post',
         'required' => 'required',
     ])
@@ -10,7 +11,7 @@
 --}}
 
 {!! Form::label($id, $label, ['class' => 'form-label']) !!}
-{!! Form::select($id, $collection, old($id), [
+{!! Form::select($id, $collection, isset($old) ? $old : old($id), [
     'placeholder' => $placeholder,
     'class' => $id . ' form-control custom-select' . ($errors->has($id) ? ' has-errors' : ''),
     'required' => $required
