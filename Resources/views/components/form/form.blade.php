@@ -5,6 +5,7 @@
         'model' => $post, // if edit
         'softdelete' => true, // optional
         'namespace' => 'post' // optional
+        'year' => $year // optional
         'fields' => [
             'title' => ['type' => 'text', 'required' => true],
         ],
@@ -12,7 +13,11 @@
     @endcomponent
 --}}
 
-<form class="card" method="POST" action="/{{ $resource }}{{ $type === 'edit' ? "/$model->id" : '' }}">
+@if(isset($year))
+    <form class="card" method="POST" action="/{{ $year }}/{{ $resource }}{{ $type === 'edit' ? "/$model->id" : '' }}">
+@else
+    <form class="card" method="POST" action="/{{ $resource }}{{ $type === 'edit' ? "/$model->id" : '' }}">
+@endif
     @csrf
 
     @if($type === 'edit')
@@ -78,6 +83,26 @@
                                 'required' => isset($options['required']) && $options['required'] === true ? true : false,
                             ])
                             @endcomponent
+                        @elseif($options['type'] === 'year')
+                            <label class="form-label" for="{{ $field }}">@lang((isset($namespace) ? "${namespace}::" : '') . 'form.' . $field . '-placeholder')</label>
+                            <input class="form-control {{ $errors->has($field) ? 'is-invalid' : '' }}"
+                                type="number"
+                                id="{{ $field }}"
+                                name="{{ $field }}"
+                                placeholder="@lang((isset($namespace) ? "${namespace}::" : '') . 'form.' . $field . '-placeholder')"
+                                min="1900"
+                                max="{{ date('Y') + 100 }}"
+                                step="1"
+                                value="{{ date('Y') }}"
+
+                                @if ($loop->first)
+                                    autofocus
+                                @endif
+
+                                @if(isset($options['required']) && $options['required'])
+                                    required
+                                @endif
+                              />
                         @endif
 
                         @if ($errors->has($field))
@@ -102,7 +127,7 @@
                 @if($basic)
                     <a href="{{ route($resource . '.index') }}" class="btn btn-link">@lang((isset($namespace) ? "${namespace}::" : '') . 'form.cancel')</a>
                 @else
-                    <a href="{{ route($resource . '.show', ['id' => $model->id]) }}" class="btn btn-link">@lang((isset($namespace) ? "${namespace}::" : '') . 'form.cancel')</a>
+                    <a href="{{ route($resource . '.show', ['id' => $model->id, 'year' => $year ?? null]) }}" class="btn btn-link">@lang((isset($namespace) ? "${namespace}::" : '') . 'form.cancel')</a>
                 @endif
 
                 <div class="btn-list ml-auto">
