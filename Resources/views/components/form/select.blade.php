@@ -14,7 +14,7 @@
 {!! Form::select($id, $collection, isset($old) ? $old : old($id), [
     'placeholder' => $placeholder,
     'class' => $id . ' form-control custom-select' . ($errors->has($id) ? ' has-errors' : ''),
-    'required' => $required
+    'required' => $required,
 ]) !!}
 
 @if ($errors->has($id))
