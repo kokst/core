@@ -119,7 +119,9 @@
     <div class="card-footer text-right">
         <div class="d-flex">
             @if($type === 'create')
-                <a href="{{ route($resource . '.index') }}" class="btn btn-link">@lang((isset($namespace) ? "${namespace}::" : '') . 'form.cancel')</a>
+                @unless(app('request')->input('first'))
+                    <a href="{{ route($resource . '.index') }}" class="btn btn-link">@lang((isset($namespace) ? "${namespace}::" : '') . 'form.cancel')</a>
+                @endunless
                 <button type="submit" class="btn btn-primary ml-auto">@lang((isset($namespace) ? "${namespace}::" : '') . $type . '.submit')</button>
             @endif
 
@@ -139,7 +141,11 @@
 </form>
 
 @if($type === 'edit')
-    <form method="POST" action="/{{ $resource }}/{{ $model->id }}">
+    @if(isset($year))
+        <form method="POST" action="/{{ $year }}/{{ $resource }}/{{ $model->id }}">
+    @else
+        <form method="POST" action="/{{ $resource }}/{{ $model->id }}">
+    @endif
         @csrf
         @method('DELETE')
 
