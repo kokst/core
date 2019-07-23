@@ -2,15 +2,15 @@
 
 @section('title')
     {{ $header }}
+@stop
 
+@section('options')
     @if(isset($years))
-        <year-switcher :year="{{ json_encode($year) }}" :years="{{ json_encode($years) }}" :resource="{{ json_encode('device') }}"></year-switcher>
-        <select class="custom-select w-auto" style="padding:0.5rem 0.75rem 0.5rem 0.75rem;">
-            <option value="0000">New</option>
-            @foreach($years as $option)
-                <option value="{{ $option }}" @if($option === $year)selected=""@endif>{{ $option }}</option>
-            @endforeach
-        </select>
+        <year-switcher :year="{{ json_encode($year) }}"
+                       :years="{{ json_encode($years) }}"
+                       :resource="{{ json_encode($resource) }}"
+                       :custom-year-create-route={{ json_encode($customYearCreateRoute ?? null) }}>
+        </year-switcher>
     @endif
 @stop
 

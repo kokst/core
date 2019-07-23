@@ -19,6 +19,7 @@ select {
             'year',
             'years',
             'resource',
+            'customYearCreateRoute'
         ],
         data() {
             return {
@@ -27,12 +28,15 @@ select {
         },
         methods: {
             update() {
-                console.log(this.resource)
-
                 if (this.selected === 'new') {
-                    console.log('redirect to new')
+                    if (this.customYearCreateRoute) {
+                        window.location.href = `/${this.resource}/${this.customYearCreateRoute}`;
+                    } else {
+                        window.location.href = `/${this.resource}/create`;
+                    }
+
                 } else {
-                    console.log('redirect to ' + this.selected)
+                    window.location.href = `/${this.selected}/${this.resource}`;
                 }
             }
         }
