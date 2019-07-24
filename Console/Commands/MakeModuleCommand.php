@@ -74,14 +74,12 @@ class MakeModuleCommand extends Command
         $names = (array) $this->argument('name');
         $resource = $this->option('resource');
         $basic = $this->option('basic');
-        $yearly = $this->option('yearly');
 
         if (!$resource && $basic) {
             $this->warn('Warning: Ignoring Basic option (-B / --basic); only available for Resource modules (-R / --resource)');
         }
 
         $this->basic = $basic ? 'true' : 'false';
-        $this->yearly = $yearly ? 'true' : 'false';
 
         $bar = $this->output->createProgressBar(count($names));
         $bar->start();
