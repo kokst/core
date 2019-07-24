@@ -11,6 +11,8 @@
             'activity' => true,
             'actions' => true,
             'basic' => false,
+            'year' => $year,
+            'years' => $years,
             'roles' => false,
         ]
     )
@@ -87,9 +89,9 @@
                                 @if($title)
                                     <td>
                                         @if($basic)
-                                            <a href="{{ route($resource . '.edit', ['id'=> $model->id]) }}" class="text-inherit">
+                                            <a href="{{ route($resource . '.edit', ['id'=> $model->id, 'year' => $year ?? null]) }}" class="text-inherit">
                                         @else
-                                            <a href="{{ route($resource . '.show', ['id'=> $model->id]) }}" class="text-inherit">
+                                            <a href="{{ route($resource . '.show', ['id'=> $model->id, 'year' => $year ?? null]) }}" class="text-inherit">
                                         @endif
                                             {{ $model->title }}
                                         </a>
@@ -125,7 +127,7 @@
 
                                 @if($actions)
                                     @if($basic)
-                                        <td class="w-1"><a href="{{ route($resource . '.edit', ['id'=> $model->id]) }}" class="icon"><i class="fe fe-edit"></i></a></td>
+                                        <td class="w-1"><a href="{{ route($resource . '.edit', ['id'=> $model->id, 'year' => $year ?? null]) }}" class="icon"><i class="fe fe-edit"></i></a></td>
                                     @else
                                         <td class="text-center">
                                             <div class="item-action dropdown">
@@ -150,7 +152,11 @@
                     </tbody>
                 </table>
                 <div class="create">
-                    <a href="{{ route($resource . '.create') }}" class="btn btn-primary btn"><i class="fe fe-plus"></i></a>
+                    @if(isset($year))
+                        <a href="{{ route($resource . '.create', ['year' => $year]) }}" class="btn btn-primary btn"><i class="fe fe-plus"></i></a>
+                    @else
+                        <a href="{{ route($resource . '.create') }}" class="btn btn-primary btn"><i class="fe fe-plus"></i></a>
+                    @endif
                 </div>
             </div>
         </div>

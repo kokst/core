@@ -13,6 +13,7 @@
         'softdelete' => (isset($softdelete) && $softdelete === false) ? false : true,
         'fields' => isset($fields) ? $fields : [],
         'basic' => (isset($basic) && $basic === true) ? true : false,
+        'year' => (isset($year)) ? $year : null,
     ])
     @endcomponent
 @stop

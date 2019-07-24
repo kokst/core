@@ -102,10 +102,13 @@ class MakeModuleCommand extends Command
                 $this->createMenuMiddleware();
                 $this->createProviders();
                 $this->createTranslations();
-                $this->createViews();
                 $this->createRoutes();
                 $this->createFeatureTests();
                 $this->createModuleFile();
+
+                if (!$resource) {
+                    $this->createViews();
+                }
 
                 if ($resource) {
                     $this->createFactories();
