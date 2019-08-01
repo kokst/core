@@ -133,8 +133,8 @@
                                             <div class="item-action dropdown">
                                                 <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="{{ route($resource . '.show', ['id'=> $model->id]) }}" class="dropdown-item"><i class="dropdown-icon fe fe-eye"></i> @lang('vendor/kokst/core/components/datatable/index.view') </a>
-                                                <a href="{{ route($resource . '.edit', ['id'=> $model->id]) }}" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> @lang('vendor/kokst/core/components/datatable/index.edit') </a>
+                                                <a href="{{ route($resource . '.show', ['id'=> $model->id, 'year' => $year ?? null]) }}" class="dropdown-item"><i class="dropdown-icon fe fe-eye"></i> @lang('vendor/kokst/core/components/datatable/index.view') </a>
+                                                <a href="{{ route($resource . '.edit', ['id'=> $model->id, 'year' => $year ?? null]) }}" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> @lang('vendor/kokst/core/components/datatable/index.edit') </a>
                                                 <div class="dropdown-divider"></div>
                                                 <form method="POST" action="/{{ $resource }}/{{ $model->id }}">
                                                     @csrf
