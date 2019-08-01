@@ -289,6 +289,7 @@ class MakeModuleCommand extends Command
             file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/index-yearly'), FILE_APPEND);
             file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/create-yearly'), FILE_APPEND);
             file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/store-yearly'), FILE_APPEND);
+            file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/show-yearly'), FILE_APPEND);
             file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/edit-yearly'), FILE_APPEND);
             file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/update-yearly'), FILE_APPEND);
             file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/destroy-yearly'), FILE_APPEND);
@@ -296,12 +297,13 @@ class MakeModuleCommand extends Command
             file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/index'), FILE_APPEND);
             file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/create'), FILE_APPEND);
             file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/store'), FILE_APPEND);
+            file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/show'), FILE_APPEND);
             file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/edit'), FILE_APPEND);
             file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/update'), FILE_APPEND);
             file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/destroy'), FILE_APPEND);
         }
 
-        file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/show'), FILE_APPEND);
+        
         file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/close'), FILE_APPEND);
     }
 

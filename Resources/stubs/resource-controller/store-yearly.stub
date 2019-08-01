@@ -16,6 +16,6 @@
 
         $year = ${{ ModuleSnake }}->year;
 
-        return redirect('/${year}/{{ ModuleDash }}');
+        return redirect("/${year}/{{ ModuleDash }}");
     }
 
