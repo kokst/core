@@ -1,0 +1,8 @@
+    /**
+     * Display the specified resource.
+     */
+    public function show(int $year, {{ Module }} ${{ ModuleSnake }}): View
+    {
+        return view('{{ ModuleLower }}::show', compact('{{ ModuleSnake }}'));
+    }
+
