@@ -9,7 +9,7 @@
                         {{ ${{ ModuleSnake }}->title }}
                     </h3>
                     <div class="card-options">
-                        <a href="{{ route('{{ ModuleDash }}.edit', ['id' => ${{ ModuleSnake }}->id]) }}" class="btn btn-secondary btn-sm ml-2">Bearbeiten</a>
+                        <a href="{{ route('{{ ModuleDash }}.edit', ['id' => ${{ ModuleSnake }}->id, 'year' => $year ?? false]) }}" class="btn btn-secondary btn-sm ml-2">Bearbeiten</a>
                     </div>
                 </div>
             </div>
