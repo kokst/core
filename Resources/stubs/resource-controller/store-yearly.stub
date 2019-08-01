@@ -1,0 +1,21 @@
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(int $year = null): RedirectResponse
+    {
+        if ($year) {
+            request()->merge(['year' => $year]);
+        }
+
+        ${{ ModuleSnake }} = {{ Module }}::create(
+            request()->validate([
+                'title' => ['required', 'min:3'],
+                'year' => ['required', 'date_format:Y']
+            ])
+        );
+
+        $year = ${{ ModuleSnake }}->year;
+
+        return redirect('/${year}/{{ ModuleDash }}');
+    }
+

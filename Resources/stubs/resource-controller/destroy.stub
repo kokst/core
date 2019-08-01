@@ -1,0 +1,9 @@
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy({{ Module }} ${{ ModuleSnake }}): RedirectResponse
+    {
+        ${{ ModuleSnake }}->delete();
+
+        return redirect('/{{ ModuleDash }}');
+    }

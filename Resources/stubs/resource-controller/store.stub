@@ -1,0 +1,14 @@
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(): RedirectResponse
+    {
+        {{ Module }}::create(
+            request()->validate([
+                'title' => ['required', 'min:3']
+            ])
+        );
+
+        return redirect('/{{ ModuleDash }}');
+    }
+

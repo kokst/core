@@ -10,7 +10,7 @@ use Illuminate\Filesystem\Filesystem;
 
 class MakeModuleCommand extends Command
 {
-    protected $signature = 'kok:make-module {name*} {--R|resource} {--B|basic}';
+    protected $signature = 'kok:make-module {name*} {--R|resource} {--B|basic} {--Y|yearly}';
 
     protected $description = 'Create a new module.';
 
@@ -35,6 +35,8 @@ class MakeModuleCommand extends Command
     protected $modulesPath;
 
     protected $basic;
+
+    protected $yearly;
 
     public function __construct(Filesystem $files)
     {
@@ -74,12 +76,18 @@ class MakeModuleCommand extends Command
         $names = (array) $this->argument('name');
         $resource = $this->option('resource');
         $basic = $this->option('basic');
+        $yearly = $this->option('yearly');
 
         if (!$resource && $basic) {
             $this->warn('Warning: Ignoring Basic option (-B / --basic); only available for Resource modules (-R / --resource)');
         }
 
+        if (!$resource && $yearly) {
+            $this->warn('Warning: Ignoring Yearly option (-Y / --yearly); only available for Resource modules (-R / --resource)');
+        }
+
         $this->basic = $basic ? 'true' : 'false';
+        $this->yearly = $yearly ? 'true' : 'false';
 
         $bar = $this->output->createProgressBar(count($names));
         $bar->start();
@@ -97,32 +105,32 @@ class MakeModuleCommand extends Command
             if (! $this->files->isDirectory($this->modulePath)) {
                 $this->makeDirectory($this->modulePath . DIRECTORY_SEPARATOR . "dir");
 
-                $this->createConfig();
-                $this->createControllers();
-                $this->createMenuMiddleware();
-                $this->createProviders();
-                $this->createTranslations();
-                $this->createRoutes();
-                $this->createFeatureTests();
-                $this->createModuleFile();
+                $this->createConfig();              $bar->advance();
+                $this->createControllers();         $bar->advance();
+                $this->createMenuMiddleware();      $bar->advance();
+                $this->createProviders();           $bar->advance();
+                $this->createTranslations();        $bar->advance();
+                $this->createRoutes();              $bar->advance();
+                $this->createFeatureTests();        $bar->advance();
+                $this->createModuleFile();          $bar->advance();
 
                 if (!$resource) {
-                    $this->createViews();
+                    $this->createViews();           $bar->advance();
                 }
 
                 if ($resource) {
-                    $this->createFactories();
-                    $this->createMigrations();
-                    $this->createSeeders();
-                    $this->createEntities();
-                    $this->createResourceControllers();
-                    $this->createObservers();
-                    $this->createPresenters();
-                    $this->createResourceProviders();
-                    $this->createResourceTranslations();
-                    $this->createResourceViews();
-                    $this->createResourceRoutes();
-                    $this->createResourceFeatureTests();
+                    $this->createFactories($yearly);                    $bar->advance();
+                    $this->createMigrations($yearly);                   $bar->advance();
+                    $this->createSeeders();                             $bar->advance();
+                    $this->createEntities($yearly);                     $bar->advance();
+                    $this->createResourceControllers($yearly);          $bar->advance();
+                    $this->createObservers($yearly);                    $bar->advance();
+                    $this->createPresenters();                          $bar->advance();
+                    $this->createResourceProviders();                   $bar->advance();
+                    $this->createResourceTranslations($yearly);         $bar->advance();
+                    $this->createResourceViews();                       $bar->advance();
+                    $this->createResourceRoutes($yearly);               $bar->advance();
+                    $this->createResourceFeatureTests();                $bar->advance();
                 }
             }
 
@@ -213,22 +221,38 @@ class MakeModuleCommand extends Command
         file_put_contents("$path/module.json", $this->replaceContent('module'));
     }
 
-    protected function createFactories()
+    protected function createFactories($yearly)
     {
         $path = $this->modulePath . "Database" . DIRECTORY_SEPARATOR . "factories";
         $this->makeDirectory($path . DIRECTORY_SEPARATOR . "dir");
 
-        file_put_contents("$path/{$this->module}Factory.php", $this->replaceContent('factory'));
+        file_put_contents("$path/{$this->module}Factory.php", $this->replaceContent('factory/open'));
+        file_put_contents("$path/{$this->module}Factory.php", $this->replaceContent('factory/fields-default'), FILE_APPEND);
+
+        if ($yearly) {
+            file_put_contents("$path/{$this->module}Factory.php", $this->replaceContent('factory/fields-yearly'), FILE_APPEND);
+        }
+
+        file_put_contents("$path/{$this->module}Factory.php", $this->replaceContent('factory/close'), FILE_APPEND);
     }
 
-    protected function createMigrations()
+    protected function createMigrations($yearly)
     {
         $path = $this->modulePath . "Database" . DIRECTORY_SEPARATOR . "Migrations";
         $this->makeDirectory($path . DIRECTORY_SEPARATOR . "dir");
 
         $filename = date('Y_m_d_His') . "_create_{$this->modulePluralSnakecase}_table.php" ;
 
-        file_put_contents("$path/$filename", $this->replaceContent('migration-create'));
+        file_put_contents("$path/$filename", $this->replaceContent('migration/open'));
+        file_put_contents("$path/$filename", $this->replaceContent('migration/fields-default'), FILE_APPEND);
+
+        if ($yearly) {
+            file_put_contents("$path/$filename", $this->replaceContent('migration/fields-yearly'), FILE_APPEND);
+        }
+
+        file_put_contents("$path/$filename", $this->replaceContent('migration/fields-timestamps'), FILE_APPEND);
+        file_put_contents("$path/$filename", $this->replaceContent('migration/fields-softdeletes'), FILE_APPEND);
+        file_put_contents("$path/$filename", $this->replaceContent('migration/close'), FILE_APPEND);
     }
 
     protected function createSeeders()
@@ -239,28 +263,58 @@ class MakeModuleCommand extends Command
         file_put_contents("$path/{$this->module}TableSeeder.php", $this->replaceContent('seeder-table'));
     }
 
-    protected function createEntities()
+    protected function createEntities($yearly)
     {
         $path = $this->modulePath . "Entities";
         $this->makeDirectory($path . DIRECTORY_SEPARATOR . "dir");
 
-        file_put_contents("$path/{$this->module}.php", $this->replaceContent('entity'));
+        file_put_contents("$path/{$this->module}.php", $this->replaceContent('entity/open'));
+        file_put_contents("$path/{$this->module}.php", $this->replaceContent('entity/fields-default'), FILE_APPEND);
+
+        if($yearly) {
+            file_put_contents("$path/{$this->module}.php", $this->replaceContent('entity/fields-yearly'), FILE_APPEND);
+        }
+
+        file_put_contents("$path/{$this->module}.php", $this->replaceContent('entity/close'), FILE_APPEND);
     }
 
-    protected function createResourceControllers()
+    protected function createResourceControllers($yearly)
     {
         $path = $this->modulePath . "Http" . DIRECTORY_SEPARATOR . "Controllers";
         $this->makeDirectory($path . DIRECTORY_SEPARATOR . "dir");
 
-        file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller'));
+        file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/open'));
+
+        if ($yearly) {
+            file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/index-yearly'), FILE_APPEND);
+            file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/create-yearly'), FILE_APPEND);
+            file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/store-yearly'), FILE_APPEND);
+            file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/edit-yearly'), FILE_APPEND);
+            file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/update-yearly'), FILE_APPEND);
+            file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/destroy-yearly'), FILE_APPEND);
+        } else {
+            file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/index'), FILE_APPEND);
+            file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/create'), FILE_APPEND);
+            file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/store'), FILE_APPEND);
+            file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/edit'), FILE_APPEND);
+            file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/update'), FILE_APPEND);
+            file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/destroy'), FILE_APPEND);
+        }
+
+        file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/show'), FILE_APPEND);
+        file_put_contents("$path/{$this->module}Controller.php", $this->replaceContent('resource-controller/close'), FILE_APPEND);
     }
 
-    protected function createObservers()
+    protected function createObservers($yearly)
     {
         $path = $this->modulePath . "Observers";
         $this->makeDirectory($path . DIRECTORY_SEPARATOR . "dir");
 
-        file_put_contents("$path/{$this->module}Observer.php", $this->replaceContent('observer'));
+        if ($yearly) {
+            file_put_contents("$path/{$this->module}Observer.php", $this->replaceContent('observer/resource-yearly'));
+        } else {
+            file_put_contents("$path/{$this->module}Observer.php", $this->replaceContent('observer/resource'));
+        }
     }
 
     protected function createPresenters()
@@ -279,14 +333,20 @@ class MakeModuleCommand extends Command
         file_put_contents("$path/{$this->module}ServiceProvider.php", $this->replaceContent('resource-service-provider-module'));
     }
 
-    protected function createResourceTranslations()
+    protected function createResourceTranslations($yearly)
     {
         $path = $this->modulePath . "Resources" . DIRECTORY_SEPARATOR . "lang" . DIRECTORY_SEPARATOR . "en";
         $this->makeDirectory($path . DIRECTORY_SEPARATOR . "dir");
 
         file_put_contents("$path/create.php", $this->replaceContent('resource-lang-en-create'));
         file_put_contents("$path/edit.php", $this->replaceContent('resource-lang-en-edit'));
-        file_put_contents("$path/form.php", $this->replaceContent('resource-lang-en-form'));
+
+        if ($yearly) {
+            file_put_contents("$path/form.php", $this->replaceContent('resource-lang/en/form-yearly'));
+        } else {
+            file_put_contents("$path/form.php", $this->replaceContent('resource-lang/en/form'));
+        }
+
         file_put_contents("$path/index.php", $this->replaceContent('resource-lang-en-index'));
     }
 
@@ -298,12 +358,16 @@ class MakeModuleCommand extends Command
         file_put_contents("$path/show.blade.php", $this->replaceContent('resource-views-show'));
     }
 
-    protected function createResourceRoutes()
+    protected function createResourceRoutes($yearly)
     {
         $path = $this->modulePath . "Routes";
         $this->makeDirectory($path . DIRECTORY_SEPARATOR . "dir");
 
-        file_put_contents("$path/web.php", $this->replaceContent('resource-routes-web'));
+        if ($yearly) {
+            file_put_contents("$path/web.php", $this->replaceContent('resource-routes/web-yearly'));
+        } else {
+            file_put_contents("$path/web.php", $this->replaceContent('resource-routes/web'));
+        }
     }
 
     protected function createResourceFeatureTests()

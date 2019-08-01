@@ -1,0 +1,12 @@
+<?php
+
+namespace Modules\{{ Module }}\Http\Controllers;
+
+use Illuminate\View\View;
+use Illuminate\Routing\Controller;
+use Modules\{{ Module }}\Entities\{{ Module }};
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Cache;
+
+class {{ Module }}Controller extends Controller
+{
