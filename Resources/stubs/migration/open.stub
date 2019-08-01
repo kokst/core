@@ -14,10 +14,3 @@ class Create{{ ModulePlural }}Table extends Migration
     public function up()
     {
         Schema::create('{{ ModulePluralSnake }}', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('title');
-            $table->timestamps();
-            $table->softDeletes();
-        });
-    }
-}

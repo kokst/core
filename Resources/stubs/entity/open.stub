@@ -12,11 +12,3 @@ class {{ Module }} extends Model implements HasPresenter
     use SoftDeletes;
 
     protected $fillable = [
-        'title'
-    ];
-
-    public function getPresenterClass()
-    {
-        return {{ Module }}Presenter::class;
-    }
-}

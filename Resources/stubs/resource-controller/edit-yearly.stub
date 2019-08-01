@@ -1,0 +1,18 @@
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(int $year, {{ Module }} ${{ ModuleSnake }}): View
+    {
+        return view('vendor.kokst.core.resource.form', [
+            'resource' => '{{ ModuleDash }}',
+            'type' => 'edit',
+            'model' => ${{ ModuleSnake }},
+            'namespace' => '{{ ModuleDash }}',
+            'year' => $year,
+            'fields' => [
+                'title' => ['type' => 'text', 'required' => true],
+            ],
+            'header' => __('{{ ModuleLower }}::edit.title'),
+        ]);
+    }
+

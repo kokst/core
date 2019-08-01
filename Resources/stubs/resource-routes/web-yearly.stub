@@ -1,0 +1,20 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('{{ ModuleDash }}', '{{ Module }}Controller@index')->middleware('auth');
+Route::get('{{ ModuleDash }}/create', '{{ Module }}Controller@create')->middleware('auth');
+Route::post('{{ ModuleDash }}', '{{ Module }}Controller@store')->middleware('auth');
+
+Route::prefix('{year?}')->group(function () {
+    Route::resource('{{ ModuleDash }}', '{{ Module }}Controller')->middleware(['auth']);
+});

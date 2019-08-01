@@ -1,0 +1,16 @@
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update({{ Module }} ${{ ModuleSnake }}): RedirectResponse
+    {
+        request()->validate([
+            'title' => ['required', 'min:3']
+        ]);
+
+        ${{ ModuleSnake }}->update(request([
+            'title'
+        ]));
+
+        return redirect('/{{ ModuleDash }}/' . ${{ ModuleSnake }}->id);
+    }
+

@@ -1,0 +1,7 @@
+<?php
+
+return [
+    'cancel' => 'Cancel',
+    'title-placeholder' => 'Title',
+    'year-placeholder' => 'Year',
+];

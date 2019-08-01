@@ -5,6 +5,3 @@ use Modules\{{ Module }}\Entities\{{ Module }};
 
 $factory->define({{ Module }}::class, function (Faker $faker) {
     return [
-        'title' => $faker->sentence(2)
-    ];
-});
