@@ -3,6 +3,6 @@
      */
     public function show(int $year, {{ Module }} ${{ ModuleSnake }}): View
     {
-        return view('{{ ModuleLower }}::show', compact('{{ ModuleSnake }}'));
+        return view('{{ ModuleLower }}::show', compact('{{ ModuleSnake }}', 'year'));
     }
 
