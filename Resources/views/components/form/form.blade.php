@@ -56,6 +56,23 @@
                                 @if(isset($options['required']) && $options['required'])
                                     required
                                 @endif>
+                        @elseif($options['type'] === 'number')
+                            <label class="form-label" for="{{ $field }}">@lang((isset($namespace) ? "${namespace}::" : '') . 'form.' . $field . '-placeholder')</label>
+                            <input class="form-control {{ $errors->has($field) ? 'is-invalid' : '' }}"
+                                type="number"
+                                id="{{ $field }}"
+                                name="{{ $field }}"
+                                placeholder="@lang((isset($namespace) ? "${namespace}::" : '') . 'form.' . $field . '-placeholder')"
+                                step="1"
+
+                                @if ($loop->first)
+                                    autofocus
+                                @endif
+
+                                @if(isset($options['required']) && $options['required'])
+                                    required
+                                @endif
+                            />
                         @elseif($options['type'] === 'password')
                             <label class="form-label" for="{{ $field }}">@lang((isset($namespace) ? "${namespace}::" : '') . 'form.' . $field . '-placeholder')</label>
 
