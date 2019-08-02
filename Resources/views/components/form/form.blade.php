@@ -90,6 +90,28 @@
                                 @if(isset($options['required']) && $options['required'])
                                     required
                                 @endif>
+                        @elseif($options['type'] === 'percent')
+                            <label class="form-label" for="{{ $field }}">@lang((isset($namespace) ? "${namespace}::" : '') . 'form.' . $field . '-placeholder')</label>
+                            <div class="input-group">
+                                <input class="form-control {{ $errors->has($field) ? 'is-invalid' : '' }}"
+                                    type="number"
+                                    id="{{ $field }}"
+                                    name="{{ $field }}"
+                                    placeholder="@lang((isset($namespace) ? "${namespace}::" : '') . 'form.' . $field . '-placeholder')"
+                                    step="1"
+
+                                    @if ($loop->first)
+                                        autofocus
+                                    @endif
+
+                                    @if(isset($options['required']) && $options['required'])
+                                        required
+                                    @endif
+                                />
+                                <span class="input-group-append" id="basic-addon2">
+                                    <span class="input-group-text">%</span>
+                                </span>
+                            </div>
                         @elseif($options['type'] === 'select')
                             @component('vendor.kokst.core.components.form.select', [
                                 'collection' => $options['collection'],
