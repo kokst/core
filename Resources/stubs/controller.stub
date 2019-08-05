@@ -9,9 +9,8 @@ class {{ Module }}Controller extends Controller
 {
     /**
      * Display the index view of the module.
-     * @return View
      */
-    public function index()
+    public function index(): View
     {
         return view('{{ ModuleLower }}::index');
     }
