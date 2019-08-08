@@ -20,6 +20,7 @@
             'resource' => '{{ ModuleDash }}',
             'type' => 'create',
             'namespace' => '{{ ModuleDash }}',
+            'year' => $year,
             'fields' => $fields,
             'header' => __('{{ ModuleLower }}::create.title'),
         ]);
