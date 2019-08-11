@@ -166,6 +166,23 @@
                                 'required' => isset($options['required']) && $options['required'] === true ? true : false,
                             ])
                             @endcomponent
+                        @elseif($options['type'] === 'checkbox')
+                            <label class="custom-control custom-checkbox" for="{{ $field }}">
+                                <input class="custom-control-input {{ $errors->has($field) ? 'is-invalid' : '' }}"
+                                    type="checkbox"
+                                    id="{{ $field }}"
+                                    name="{{ $field }}"
+
+                                @if(old($field, $type === 'edit' && isset($model->$field) && $model->$field === 1))
+                                    checked
+                                @endif
+
+                                @if(isset($options['required']) && $options['required'])
+                                    required
+                                @endif
+                                />
+                                <span class="custom-control-label">@lang((isset($namespace) ? "${namespace}::" : '') . 'form.' . $field . '-placeholder')</span>
+                            </label>
                         @elseif($options['type'] === 'year')
                             <label class="form-label" for="{{ $field }}">@lang((isset($namespace) ? "${namespace}::" : '') . 'form.' . $field . '-placeholder')</label>
                             <input class="form-control {{ $errors->has($field) ? 'is-invalid' : '' }}"
