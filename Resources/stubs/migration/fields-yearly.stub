@@ -1,1 +1,1 @@
-            $table->smallInteger('year');
+            $table->year('year');

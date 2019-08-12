@@ -64,6 +64,7 @@
                                 name="{{ $field }}"
                                 placeholder="@lang((isset($namespace) ? "${namespace}::" : '') . 'form.' . $field . '-placeholder')"
                                 step="1"
+                                value="{{ old($field, $type === 'edit' && isset($model->$field) ? $model->$field : null) }}"
 
                                 @if ($loop->first)
                                     autofocus
@@ -81,7 +82,6 @@
                                 id="{{ $field }}"
                                 name="{{ $field }}"
                                 placeholder="@lang((isset($namespace) ? "${namespace}::" : '') . 'form.' . $field . '-placeholder')"
-                                value="{{ old($field, $type === 'edit' && isset($model->$field) ? $model->$field : null) }}"
 
                                 @if ($loop->first)
                                     autofocus
@@ -99,6 +99,7 @@
                                     name="{{ $field }}"
                                     placeholder="@lang((isset($namespace) ? "${namespace}::" : '') . 'form.' . $field . '-placeholder')"
                                     step="1"
+                                    value="{{ old($field, $type === 'edit' && isset($model->$field) ? $model->$field : null) }}"
 
                                     @if ($loop->first)
                                         autofocus
@@ -121,6 +122,7 @@
                                     name="{{ $field }}"
                                     placeholder="@lang((isset($namespace) ? "${namespace}::" : '') . 'form.' . $field . '-placeholder')"
                                     step="1"
+                                    value="{{ old($field, $type === 'edit' && isset($model->$field) ? $model->$field : null) }}"
 
                                     @if ($loop->first)
                                         autofocus
@@ -138,20 +140,20 @@
                             <label class="form-label" for="{{ $field }}">@lang((isset($namespace) ? "${namespace}::" : '') . 'form.' . $field . '-placeholder')</label>
                             <div class="input-group">
                                 <input class="form-control {{ $errors->has($field) ? 'is-invalid' : '' }}"
-                                    type="number"
-                                    id="{{ $field }}"
-                                    name="{{ $field }}"
-                                    placeholder="@lang((isset($namespace) ? "${namespace}::" : '') . 'form.' . $field . '-placeholder')"
-                                    step="1"
+                                type="text"
+                                id="{{ $field }}"
+                                name="{{ $field }}"
+                                placeholder="@lang((isset($namespace) ? "${namespace}::" : '') . 'form.' . $field . '-placeholder')"
+                                value="{{ old($field, $type === 'edit' && isset($model->$field) ? $model->$field : null) }}"
 
-                                    @if ($loop->first)
-                                        autofocus
-                                    @endif
+                                @if ($loop->first)
+                                    autofocus
+                                @endif
 
-                                    @if(isset($options['required']) && $options['required'])
-                                        required
-                                    @endif
-                                />
+                                @if(isset($options['required']) && $options['required'])
+                                    required
+                                @endif>
+
                                 <span class="input-group-append" id="basic-addon2">
                                     <span class="input-group-text">€</span>
                                 </span>
