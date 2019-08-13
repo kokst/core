@@ -205,6 +205,14 @@
                                     required
                                 @endif
                               />
+                        @elseif($options['type'] === 'custom')
+                            @if(View::exists($namespace.'::fields.' . $field))
+                                @include($namespace.'::fields.' . $field)
+                            @else
+                                <div class="alert alert-danger" role="alert">
+                                    <strong>View {{ $namespace.'::fields.' . $field }} not found.
+                                </div>
+                            @endif
                         @else
                             @if(config('app.debug'))
                                 <div class="alert alert-danger" role="alert">
