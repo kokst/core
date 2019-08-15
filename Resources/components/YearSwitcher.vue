@@ -1,6 +1,6 @@
 <template>
     <select class="custom-select w-auto" v-model="selected" @change="update">
-        <option v-if="disableYearCreateRoute === undefined" value="new">New</option>
+        <option v-if="disableYearCreateRoute !== true" value="new">New</option>
         <option v-for="option in years" v-bind:key="option.id" :value="option">
             {{ option }}
         </option>
@@ -18,7 +18,7 @@ select {
         props: [
             'year',
             'years',
-            'resource',
+            'namespace',
             'customYearCreateRoute',
             'disableYearCreateRoute',
         ],
@@ -31,9 +31,9 @@ select {
             update() {
                 if (this.selected === 'new') {
                     if (this.customYearCreateRoute) {
-                        window.location.href = `/${this.resource}/${this.customYearCreateRoute}`;
+                        window.location.href = `/${this.namespace}/${this.customYearCreateRoute}`;
                     } else {
-                        window.location.href = `/${this.resource}/create`;
+                        window.location.href = `/${this.namespace}/create`;
                     }
 
                 } else {
