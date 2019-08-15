@@ -6,6 +6,7 @@ use Modules\{{ Module }}\Entities\{{ Module }};
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Modules\{{ Module }}\Observers\{{ Module }}Observer;
+use Modules\{{ Module }}\Http\Middleware\DefineMenus;
 
 class {{ Module }}ServiceProvider extends ServiceProvider
 {
@@ -22,8 +23,7 @@ class {{ Module }}ServiceProvider extends ServiceProvider
         $this->registerFactories();
         $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
 
-        $kernel = $this->app->make('Illuminate\Contracts\Http\Kernel');
-        $kernel->pushMiddleware('Modules\{{ Module }}\Http\Middleware\DefineMenus');
+        $this->app['router']->pushMiddlewareToGroup('web', DefineMenus::class);
 
         {{ Module }}::observe({{ Module }}Observer::class);
     }
