@@ -210,7 +210,7 @@
                                 @include($namespace.'::fields.' . $field)
                             @else
                                 <div class="alert alert-danger" role="alert">
-                                    <strong>View {{ $namespace.'::fields.' . $field }} not found.
+                                    <strong>View {{ $namespace.'::fields.' . $field }}</strong> not found.
                                 </div>
                             @endif
                         @else
