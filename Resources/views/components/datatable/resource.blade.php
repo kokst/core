@@ -101,7 +101,11 @@
                                 @foreach($extrafields as $extrafield => $options)
                                     <td>
                                         <div>
-                                            {{ $model->$extrafield }}
+                                            @if(isset($options['escape']) && $options['escape'] === false)
+                                                {!! $model->$extrafield !!}
+                                            @else
+                                                {{ $model->$extrafield }}
+                                            @endif
                                         </div>
                                     </td>
                                 @endforeach
