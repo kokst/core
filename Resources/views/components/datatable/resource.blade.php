@@ -11,6 +11,7 @@
             'activity' => true,
             'actions' => true,
             'basic' => false,
+            'filters' => false,
             'year' => $year,
             'years' => $years,
             'roles' => false,
@@ -49,25 +50,25 @@
                     <thead>
                         <tr>
                             @if($id)
-                                <th class="w-1">@lang('vendor/kokst/core/components/datatable/index.id')</th>
+                                <th class="{{ $filters ? 'w-1 no-sort no-filter' : 'w-1 no-filter'}}">@lang('vendor/kokst/core/components/datatable/index.id')</th>
                             @endif
 
                             @if($title)
-                                <th>@lang('vendor/kokst/core/components/datatable/index.title')</th>
+                                <th class="{{ $filters ? 'no-sort no-filter' : ''}}">@lang('vendor/kokst/core/components/datatable/index.title')</th>
                             @endif
 
                             @foreach($extrafields as $extrafield)
-                                <th {{ $extrafield['sort'] == false ? 'class=no-sort' : '' }}>
+                                <th {{ ($filters === true && isset($extrafield['filter']) && $extrafield['filter'] === true) || $extrafield['sort'] == false ? 'class=no-sort' : 'class=no-filter' }}>
                                     {{ $extrafield['header'] }}
                                 </th>
                             @endforeach
 
                             @if($roles)
-                                <th>@lang('vendor/kokst/core/components/datatable/index.roles')</th>
+                                <th class="{{ $filters ? 'no-sort' : 'no-filter'}}">@lang('vendor/kokst/core/components/datatable/index.roles')</th>
                             @endif
 
                             @if($activity)
-                                <th>@lang('vendor/kokst/core/components/datatable/index.activity')</th>
+                                <th class="{{ $filters ? 'no-sort no-filter' : ''}}">@lang('vendor/kokst/core/components/datatable/index.activity')</th>
                             @endif
 
                             @if($actions)
@@ -216,6 +217,10 @@
                 "stateDuration": 60 * 60 * 24,
                 "pagingType": paginationType,
 
+                @if($filters)
+                "order": [[ 0, "desc" ]],
+                @endif
+
                 "columnDefs": [{
                     "targets": 'no-sort',
                     "orderable": false,
@@ -249,7 +254,62 @@
                             $(this).off();
                         });
                     }
+
+                    @if($filters)
+                    $('#table th').each(function() {
+                        $(this).removeClass('sorting sorting_asc sorting_desc');
+                        $(this).addClass('sorting_disabled');
+                        $(this).off();
+                    });
+                    @endif
+                },
+
+                @if($filters)
+                initComplete: function () {
+                    $('#table thead tr').clone(true).appendTo( '#table thead' );
+
+                    this.api().columns().every( function () {
+                        var column = this;
+                        var select = $('<select class="form-control column-filter"><option placeholder="" value=""></option></select>')
+                            .appendTo( $(column.header()).empty() )
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                val = val.replace('<div>', "").replace('<\\/div>', "").replace(/(\r\n|\n|\r)/gm, "").trim();
+
+                                column
+                                    .search( val ? val : '', true, false )
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each( function ( d, j ) {
+                            select.append( '<option value="'+d+'">'+d+'</option>' )
+                        });
+                    });
+
+                    require(['jquery', 'selectize'], function ($, selectize) {
+                        $(document).ready(function () {
+                            $('.column-filter').selectize({});
+                        });
+                    });
+
+                    $('#table thead tr')[1].parentNode.insertBefore($('#table thead tr')[1], $('#table thead tr')[0]);
+
+                    $('#table th').each(function() {
+                        $(this).removeClass('sorting sorting_asc sorting_desc');
+                        $(this).addClass('sorting_disabled');
+                        $(this).off();
+                    });
+
+                    $('#table thead tr:eq(1) th').each(function() {
+                        if($(this).hasClass('no-filter')) {
+                            $(this).empty();
+                        }
+                    });
                 }
+                @endif
             });
 
             $("#search").each(function() {

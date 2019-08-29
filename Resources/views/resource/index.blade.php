@@ -17,6 +17,7 @@
             'basic' => (isset($basic) && $basic === true) ? true : false,
             'year' => (isset($year)) ? $year : null,
             'roles' => (isset($roles) && $roles === true) ? true : false,
+            'filters' => (isset($filters) && $filters === true) ? true : false,
         ]
     )
 
