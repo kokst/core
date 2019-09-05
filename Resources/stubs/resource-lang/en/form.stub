@@ -3,4 +3,5 @@
 return [
     'cancel' => 'Cancel',
     'title-placeholder' => 'Title',
+    'danger' => 'Danger Zone',
 ];
