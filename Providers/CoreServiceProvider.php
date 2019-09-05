@@ -24,6 +24,7 @@ class CoreServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__ . '/../Resources/lang/en' => resource_path('lang/en/vendor/kokst/core'),
+            __DIR__ . '/../Resources/lang/de' => resource_path('lang/de/vendor/kokst/core'),
         ]);
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'core');
