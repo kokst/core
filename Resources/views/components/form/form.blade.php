@@ -267,7 +267,7 @@
 
         <div class="card card-collapsed">
             <div class="card-header">
-                <h3 class="card-title">Danger Zone</h3>
+                <h3 class="card-title">@lang((isset($namespace) ? "${namespace}::" : '') . 'form.danger')</h3>
                 <div class="card-options">
                     <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
                 </div>
