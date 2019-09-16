@@ -1,20 +1,26 @@
 <template>
-    <select class="custom-select w-auto" v-model="selected" @change="update">
+    <selectize class="year-switcher w-auto" v-model="selected" @input="update" :settings="settings">
         <option v-if="disableYearCreateRoute !== true" value="new">{{ $t('vendor.kokst.core.components.yearswitcher.index.new') }}</option>
         <option v-for="option in years" v-bind:key="option.id" :value="option">
             {{ option }}
         </option>
-    </select>
+    </selectize>
 </template>
 
-<style scoped>
-select {
-    padding: 0.5rem 0.75rem 0.5rem 0.75rem;
+<style>
+.year-switcher .selectize-input {
+    min-width: 70px;
+    display: inline-block;
 }
 </style>
 
 <script>
+    import Selectize from 'vue2-selectize'
+
     export default {
+        components: {
+            Selectize
+        },
         props: [
             'year',
             'years',
@@ -25,6 +31,7 @@ select {
         data() {
             return {
                 selected: this.year,
+                settings: {},
             }
         },
         methods: {
