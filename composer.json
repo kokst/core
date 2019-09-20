@@ -10,7 +10,7 @@
     ],
     "require": {
         "tabler/tabler": "0.0.33",
-        "mccool/laravel-auto-presenter": "^7.2",
+        "mccool/laravel-auto-presenter": "^7.3",
         "jenssegers/date": "^3.5"
     },
     "extra": {
