@@ -7,6 +7,7 @@ use function Safe\file_put_contents;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Str;
 
 class MakeModuleCommand extends Command
 {
@@ -94,12 +95,12 @@ class MakeModuleCommand extends Command
 
         foreach ($names as $name) {
             $this->module = $name;
-            $this->moduleDashcase = str_replace('_', '-', snake_case($name));
-            $this->moduleSnakecase = snake_case($name);
+            $this->moduleDashcase = str_replace('_', '-', Str::snake($name));
+            $this->moduleSnakecase = Str::snake($name);
             $this->moduleLowercase = strtolower($name);
-            $this->modulePlural = str_plural($name);
-            $this->modulePluralLowercase = strtolower(str_plural($name));
-            $this->modulePluralSnakecase = snake_case(str_plural($name));
+            $this->modulePlural = Str::plural($name);
+            $this->modulePluralLowercase = strtolower(Str::plural($name));
+            $this->modulePluralSnakecase = Str::snake(Str::plural($name));
             $this->modulePath = $this->modulesPath . DIRECTORY_SEPARATOR . $name . DIRECTORY_SEPARATOR;
 
             if (! $this->files->isDirectory($this->modulePath)) {
