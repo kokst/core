@@ -132,7 +132,7 @@
 
                                 @if($actions)
                                     @if($basic)
-                                        <td class="w-1"><a href="{{ route($resource . '.edit', ['id'=> $model->id, 'year' => $year ?? null]) }}" class="icon"><i class="fe fe-edit"></i></a></td>
+                                        <td class="w-1"><a href="{{ route($resource . '.edit', [Str::snake(Str::camel($resource)) => $model->id, 'year' => $year ?? null]) }}" class="icon"><i class="fe fe-edit"></i></a></td>
                                     @else
                                         <td class="text-center">
                                             <div class="item-action dropdown">
