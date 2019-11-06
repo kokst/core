@@ -284,17 +284,23 @@
                                     .draw();
                             });
 
+                        var found = false;
                         column.data().unique().sort().each( function ( d, j ) {
                             var dEscaped = $.fn.dataTable.util.escapeRegex(d)
                             dEscaped = dEscaped.replace('<div>', "").replace('<\\/div>', "").replace(/(\r\n|\n|\r)/gm, "").trim()
 
                             var selected = '';
                             if (dEscaped === column.search()) {
+                                found = true;
                                 selected = 'selected="selected"';
                             }
 
                             select.append('<option value="'+d+'"'+selected+'>'+d+'</option>')
                         });
+
+                        if (found === false) {
+                            column.search('', true, false).draw();
+                        }
                     });
 
                     require(['jquery', 'selectize'], function ($, selectize) {
