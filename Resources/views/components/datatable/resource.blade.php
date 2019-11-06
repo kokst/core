@@ -58,7 +58,7 @@
                             @endif
 
                             @foreach($extrafields as $extrafield)
-                                <th {{ ($filters === true && isset($extrafield['filter']) && $extrafield['filter'] === true) || $extrafield['sort'] == false ? 'class=no-sort' : 'class=no-filter' }}>
+                                <th {{ ($filters === true && isset($extrafield['filter']) && $extrafield['filter'] === true) || $extrafield['sort'] == false ? 'class=no-sort' : 'class=no-filter' }} style="{{ isset($extrafield['hidden']) && $extrafield['hidden'] ? 'display: none;' : ''}}">
                                     {{ $extrafield['header'] }}
                                 </th>
                             @endforeach
@@ -100,7 +100,7 @@
                                 @endif
 
                                 @foreach($extrafields as $extrafield => $options)
-                                    <td>
+                                    <td style="{{ isset($options['hidden']) && $options['hidden'] ? 'display: none;' : ''}}">
                                         <div>
                                             @if(isset($options['escape']) && $options['escape'] === false)
                                                 {!! $model->$extrafield !!}
