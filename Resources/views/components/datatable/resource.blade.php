@@ -285,7 +285,15 @@
                             });
 
                         column.data().unique().sort().each( function ( d, j ) {
-                            select.append( '<option value="'+d+'">'+d+'</option>' )
+                            var dEscaped = $.fn.dataTable.util.escapeRegex(d)
+                            dEscaped = dEscaped.replace('<div>', "").replace('<\\/div>', "").replace(/(\r\n|\n|\r)/gm, "").trim()
+
+                            var selected = '';
+                            if (dEscaped === column.search()) {
+                                selected = 'selected="selected"';
+                            }
+
+                            select.append('<option value="'+d+'"'+selected+'>'+d+'</option>')
                         });
                     });
 
