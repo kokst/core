@@ -14,6 +14,7 @@
             'extrafields' => isset($extrafields) ? $extrafields : [],
             'activity' => (isset($activity) && $activity === false) ? false : true,
             'actions' => (isset($actions) && $actions === false) ? false : true,
+            'actionlist' => isset($actionlist) ? $actionlist : [],
             'basic' => (isset($basic) && $basic === true) ? true : false,
             'year' => (isset($year)) ? $year : null,
             'roles' => (isset($roles) && $roles === true) ? true : false,
