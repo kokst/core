@@ -10,6 +10,9 @@
             ],
             'activity' => true,
             'actions' => true,
+            'actionlist' => [
+                'view' => ['header' => 'View', 'route' => 'resource.edit', 'icon' => 'eye'],
+            ],
             'basic' => false,
             'filters' => false,
             'year' => $year,
@@ -138,15 +141,21 @@
                                             <div class="item-action dropdown">
                                                 <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="{{ route($resource . '.show', ['id'=> $model->id, 'year' => $year ?? null]) }}" class="dropdown-item"><i class="dropdown-icon fe fe-eye"></i> @lang('vendor/kokst/core/components/datatable/index.view') </a>
-                                                <a href="{{ route($resource . '.edit', ['id'=> $model->id, 'year' => $year ?? null]) }}" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> @lang('vendor/kokst/core/components/datatable/index.edit') </a>
-                                                <div class="dropdown-divider"></div>
-                                                <form method="POST" action="/{{ $resource }}/{{ $model->id }}">
-                                                    @csrf
-                                                    @method('DELETE')
+                                                @if($actionlist)
+                                                    @foreach($actionlist as $action => $options)
+                                                        <a href="{{ route($options['route'], [Str::snake(Str::camel($resource)) => $model->id]) }}" class="dropdown-item"><i class="dropdown-icon fe fe-{{ $options['icon'] }}"></i> {{ $options['header'] }} </a>
+                                                    @endforeach
+                                                @else
+                                                    <a href="{{ route($resource . '.show', [Str::snake(Str::camel($resource)) => $model->id, 'year' => $year ?? null]) }}" class="dropdown-item"><i class="dropdown-icon fe fe-eye"></i> @lang('vendor/kokst/core/components/datatable/index.view') </a>
+                                                    <a href="{{ route($resource . '.edit', [Str::snake(Str::camel($resource)) => $model->id, 'year' => $year ?? null]) }}" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> @lang('vendor/kokst/core/components/datatable/index.edit') </a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <form method="POST" action="/{{ $resource }}/{{ $model->id }}">
+                                                        @csrf
+                                                        @method('DELETE')
 
-                                                    <button type="submit" class="dropdown-item"><i class="dropdown-icon fe fe-trash"></i> @lang('vendor/kokst/core/components/datatable/index.delete')</button>
-                                                </form>
+                                                        <button type="submit" class="dropdown-item"><i class="dropdown-icon fe fe-trash"></i> @lang('vendor/kokst/core/components/datatable/index.delete')</button>
+                                                    </form>
+                                                @endif
                                                 </div>
                                             </div>
                                         </td>
