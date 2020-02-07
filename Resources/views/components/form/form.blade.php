@@ -245,7 +245,7 @@
                 @if($basic)
                     <a href="{{ route($resource . '.index') }}" class="btn btn-link">@lang((isset($namespace) ? "${namespace}::" : '') . 'form.cancel')</a>
                 @else
-                    <a href="{{ route($resource . '.show', ['id' => $model->id, 'year' => $year ?? null]) }}" class="btn btn-link">@lang((isset($namespace) ? "${namespace}::" : '') . 'form.cancel')</a>
+                    <a href="{{ route($resource . '.show', [Str::snake(Str::camel($resource)) => $model->id, 'year' => $year ?? null]) }}" class="btn btn-link">@lang((isset($namespace) ? "${namespace}::" : '') . 'form.cancel')</a>
                 @endif
 
                 <div class="btn-list ml-auto">
