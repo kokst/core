@@ -93,9 +93,9 @@
                                 @if($title)
                                     <td>
                                         @if($basic)
-                                            <a href="{{ route($resource . '.edit', ['id'=> $model->id, 'year' => $year ?? null]) }}" class="text-inherit">
+                                            <a href="{{ route($resource . '.edit', [Str::snake(Str::camel($resource)) => $model->id, 'year' => $year ?? null]) }}" class="text-inherit">
                                         @else
-                                            <a href="{{ route($resource . '.show', ['id'=> $model->id, 'year' => $year ?? null]) }}" class="text-inherit">
+                                            <a href="{{ route($resource . '.show', [Str::snake(Str::camel($resource)) => $model->id, 'year' => $year ?? null]) }}" class="text-inherit">
                                         @endif
                                             {{ $model->title }}
                                         </a>
