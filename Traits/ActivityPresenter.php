@@ -2,7 +2,7 @@
 
 namespace Kokst\Core\Traits;
 
-use Jenssegers\Date\Date;
+use Carbon\Carbon;
 
 trait ActivityPresenter
 {
@@ -23,9 +23,9 @@ trait ActivityPresenter
 
     protected function activity(): array
     {
-        $now = new Date('now');
-        $updated = new Date($this->wrappedObject->updated_at);
-        $created = new Date($this->wrappedObject->created_at);
+        $now = new Carbon('now');
+        $updated = new Carbon($this->wrappedObject->updated_at);
+        $created = new Carbon($this->wrappedObject->created_at);
 
         $data = $now->format('U') - $updated->format('U');
         $label = __('vendor/kokst/core/components/datatable/index.updated');
