@@ -4,11 +4,12 @@ namespace Modules\{{ Module }}\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Lavary\Menu\Facade as Menu;
 
 class DefineMenus
 {
-    public function handle(Request $request, Closure $next): object
+    public function handle(Request $request, Closure $next): Response
     {
         $menu = Menu::get('primary') ?? Menu::make('primary', function () {
         });
