@@ -9,8 +9,12 @@
 
 <style>
 .year-switcher .selectize-input {
-    min-width: 70px;
     display: inline-block;
+}
+
+.year-switcher .selectize-input,
+.year-switcher .selectize-dropdown {
+    min-width: 70px;
 }
 </style>
 
